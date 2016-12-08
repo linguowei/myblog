@@ -12,21 +12,21 @@
                 <p>this is a blog</p>
             </div>
             <div class="archive">
-                <div class="archive-left">
+                <div class="archive-left" @click="article">
                     <el-tooltip class="item" effect="dark" content="文章" placement="bottom">
                         <p>46</p>
                         <img src="./assets/file.png" height="20" width="20">
                     </el-tooltip>
                 </div>
                 <div class="divider"></div>
-                <div class="archive-center">
+                <div class="archive-center" @click="classification">
                     <el-tooltip class="item" effect="dark" content="分类" placement="bottom">
                         <p>25</p>
                         <img src="./assets/folder.png" height="20" width="20">
                     </el-tooltip>
                 </div>
                 <div class="divider"></div>
-                <div class="archive-right">
+                <div class="archive-right" @click="label">
                     <el-tooltip class="item" effect="dark" content="标签" placement="bottom">
                         <p>31</p>
                         <img src="./assets/bookmark.png" height="20" width="20">
@@ -37,16 +37,25 @@
                 <ul>
                     <router-link to="/home"><li>首页</li></router-link>
                     <router-link to="/archive"><li>归档</li></router-link>
-                    <router-link to="/search"><li>搜索</li></router-link>
-                    <router-link to="/about"><li class="about">关于我</li></router-link>
+                    <router-link to="/about"><li>关于我</li></router-link>
+                    <div class="seach" @mouseover="seach" @mouseout="test">
+                        <el-input 
+                            class="seach-input"
+                            v-show="isShowSeach"
+                            placeholder="请输入标题关键字"
+                            icon="search"
+                            v-model="input2">
+                        </el-input>
+                        <span v-show="!isShowSeach">搜索</span>
+                    </div>
                 </ul>
             </div>
         </div>
         <div class="content-panel">
             <div class="content-panel-header">
-                <h4 v-if="this.$route.path === '/' || this.$route.path === '/home'">首页</h4>
+                <h4 v-if="this.$route.path === '/' || this.$route.path === '/home'">最新文章</h4>
                 <h4 v-if="this.$route.path === '/archive'">归档</h4>
-                <h4 v-if="this.$route.path === '/search'">搜索</h4>
+                <h4 v-if="this.$route.path === '/search'"></h4>
                 <h4 v-if="this.$route.path === '/about'">关于我</h4>
             </div>
             <div class="content-panel-content">
@@ -63,7 +72,8 @@ export default {
     name: 'app',
     data () {
         return {
-            msg: ''
+            isShowSeach: false,
+            input2: ''
         }
     },
     mounted: function(){
@@ -78,6 +88,24 @@ export default {
     methods: {
         headPortrait: function(){
             this.$router.push('/about')
+        },
+        // 文章
+        article: function(){
+            this.$router.push('/home')
+        },
+        // 分类
+        classification: function(){
+            this.$router.push('/classify')
+        },
+        //标签
+        label: function(){
+            this.$router.push('/label')
+        },
+        seach: function(){
+            this.isShowSeach = true
+        },
+        test: function(){
+            this.isShowSeach = false
         }
     },
     directives: {
@@ -217,13 +245,25 @@ body {
     transition: all 0.5s;
     border-top: 1px #f3f3f3 solid; 
 }
-.about {
-    border-radius: 0 0 5px 5px;
-}
 .nav-router > ul li:hover {
     background-color: #d4d4d4;
     color: #fff;
     transition: all 0.5s;
+}
+.seach {
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px #f3f3f3 solid;
+}
+.seach .seach-input {
+    margin: 0 auto;
+    margin-top: 7px;
+    width:220px;
+    height:38px;
+}
+.seach:hover {
+    background-color: #fff;
+    border-radius: 0px 0px 5px 5px;
 }
 .content-panel {
     width: 65%;
@@ -239,14 +279,13 @@ body {
     background-color: #fafafa;
     border-radius: 5px 5px 0 0;
     padding-left: 25px;
-    text-align: center;
     box-shadow: 0 0 1px 0px #ccc;
     color: #545455;
     font-size: 20px;
 }
 .content-panel-content {
     min-height: 600px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 10px 10px 10px;
 }
 </style>
 
