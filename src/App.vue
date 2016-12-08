@@ -38,9 +38,9 @@
                     <router-link to="/home"><li>首页</li></router-link>
                     <router-link to="/archive"><li>归档</li></router-link>
                     <router-link to="/about"><li>关于我</li></router-link>
-                    <div class="seach" @mouseover="seach" @mouseout="test">
+                    <div class="search" @mouseover="searchover" @mouseout="searchout">
                         <el-input 
-                            class="seach-input"
+                            class="search-input"
                             v-show="isShowSeach"
                             placeholder="请输入标题关键字"
                             icon="search"
@@ -101,10 +101,10 @@ export default {
         label: function(){
             this.$router.push('/label')
         },
-        seach: function(){
+        searchover: function(){
             this.isShowSeach = true
         },
-        test: function(){
+        searchout: function(){
             this.isShowSeach = false
         }
     },
@@ -250,18 +250,18 @@ body {
     color: #fff;
     transition: all 0.5s;
 }
-.seach {
+.search {
     height: 50px;
     line-height: 50px;
     border-top: 1px #f3f3f3 solid;
 }
-.seach .seach-input {
+.search .search-input {
     margin: 0 auto;
     margin-top: 7px;
     width:220px;
     height:38px;
 }
-.seach:hover {
+.search:hover {
     background-color: #fff;
     border-radius: 0px 0px 5px 5px;
 }

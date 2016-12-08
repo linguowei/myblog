@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<div @click="goBack">返回</div>
 		<h1>这是文章详情</h1>
 	</div>
 </template>
@@ -12,7 +13,12 @@ export default {
 		}
 	},
 	mounted: function(){
-		console.log('test')
+		console.log(this.$route.params.dataId)
+	},
+	methods: {
+		goBack: function(){
+			this.$router.go(-1)
+		}
 	}
 }
 </script>

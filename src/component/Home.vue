@@ -24,13 +24,14 @@ export default {
 	    		// },
 	    		// {title: '这是标题4', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
 	    		// },
-    		]
+    		],
+    		dataId: 'test1'
     	}
     },
     methods: {
     	articleDetails: function(title){
-    		this.$router.push('/articleDetails')
-    		console.log(title)
+    		this.$router.push('/articleDetails:'+title+'')
+    		// console.log(title)
     	}
     },
     mounted: function(){
