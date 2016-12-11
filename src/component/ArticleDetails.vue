@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<div @click="goBack">返回</div>
-		<h1>这是文章详情</h1>
+		<h3>{{title}}</h3>
+		<p>{{content}}</p>
 	</div>
 </template>
 
@@ -9,20 +10,22 @@
 export default {
 	data () {
 		return {
-
+			title: '',
+			content: ''
 		}
 	},
 	mounted: function(){
-		this.$http.post('/articleDatails',{
-			articleTitle: this.$route.params.title
-		}).then(
+		var id = this.$route.params.id
+		this.$http.get('/articleDetails/'+ id)
+		.then(
 			respone => {
-				respone.body,
+				this.title = respone.body.title,
+				this.content = respone.body.content,
 				console.log(respone.body)
 			},
 			respone => console.log('错误'+respone)
 		)
-		console.log(this.$route.params.title)
+		console.log(this.$route.params.id)
 	},
 	methods: {
 		goBack: function(){

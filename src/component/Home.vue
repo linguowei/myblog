@@ -2,7 +2,7 @@
 	<div>
 		<ul>
 			<li class="article-wrap" v-for="item in articleList">
-				<h3 @click="articleDetails(item.title)">{{item.title}}</h3>
+				<h3 @click="articleDetails(item._id)">{{item.title}}</h3>
 				<p>{{item.content}}</p>
 				<div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
 				<div class="article-underline"></div>
@@ -20,8 +20,8 @@ export default {
     	}
     },
     methods: {
-    	articleDetails: function(title){
-    		this.$router.push('/articleDetails:'+title+'')
+    	articleDetails: function(id){
+    		this.$router.push('/articleDetails'+id+'')
     		// console.log(title)
     	}
     },

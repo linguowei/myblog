@@ -25,7 +25,7 @@ const router = new VueRouter({
 		{path: '/archive', component: archive},
 		{path: '/search', component: search},
 		{path: '/about', component: about},
-		{path: '/articleDetails:dataId', component: articleDetails},
+		{path: '/articleDetails:id', component: articleDetails},
 		{path: '/classify', component: classify},
 		{path: '/label', component: label},
 	]
