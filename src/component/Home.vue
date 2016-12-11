@@ -3,8 +3,8 @@
 		<ul>
 			<li class="article-wrap" v-for="item in articleList">
 				<h3 @click="articleDetails(item.title)">{{item.title}}</h3>
-				<p>{{item.passages}}</p>
-				<p class="article-date">{{item.year}}年{{item.month}}月{{item.day}}日</p>
+				<p>{{item.content}}</p>
+				<div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
 				<div class="article-underline"></div>
 			</li>
 		</ul>
@@ -15,16 +15,7 @@
 export default {
     data () {
     	return {
-    		articleList: [
-    			// {title: '这是标题1', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	    		// },
-	    		// {title: '这是标题2', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	    		// },
-	    		// {title: '这是标题3', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	    		// },
-	    		// {title: '这是标题4', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	    		// },
-    		],
+    		articleList: [],
     		dataId: 'test1'
     	}
     },
@@ -36,7 +27,9 @@ export default {
     },
     mounted: function(){
     	this.$http.get('/articleList').then(
-    		respone => this.articleList = respone.body,
+    		respone => {
+    			this.articleList = respone.body
+    		},
     		respone => console.log('erroe'+respone)
     	)
     }
@@ -59,10 +52,15 @@ export default {
 	background-color: #f6f6f6;
 }
 .article-wrap > p {
-	max-height: 110px;
-	padding: 10px 0 10px 0;
-	color: #616161;
+	height: 90px;
+	margin-bottom: 10px;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
 }
+
 .article-date {
 	color: #a5a5a5;
 	font-size: 14px;

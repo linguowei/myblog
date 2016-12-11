@@ -13,7 +13,16 @@ export default {
 		}
 	},
 	mounted: function(){
-		console.log(this.$route.params.dataId)
+		this.$http.post('/articleDatails',{
+			articleTitle: this.$route.params.title
+		}).then(
+			respone => {
+				respone.body,
+				console.log(respone.body)
+			},
+			respone => console.log('错误'+respone)
+		)
+		console.log(this.$route.params.title)
 	},
 	methods: {
 		goBack: function(){

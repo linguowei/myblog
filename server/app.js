@@ -4,24 +4,38 @@ var path = require('path')
 var app = express()
 var mime = require('mime')
 
+var db = require('./db.js')
+// console.log(db)
+
+// new db.Article()
+
 var resolve = file => path.resolve(__dirname, file)
 
 app.use('/dist', express.static(resolve('../dist')))
 
 
-var articleList = [
-	{title: '这是标题1', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	},
-	{title: '这是标题2', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	},
-	{title: '这是标题3', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	},
-	{title: '这是标题4', passages: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', year: '2016', month: '12', day: '8'
-	},
-]
+var articleList = {
+	title: '这是标题6', 
+	content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', 
+	date: new Date()
+}
+
+
+// 保存操作
+// new db.Article(articleList).save(function(error){
+// 	console.log(error ? 'error' : 'success')
+// })
+
 
 app.get('/articleList', function(req, res){
-	res.json(articleList)
+	db.Article.find({}, function(err, docs){
+		if (err) {
+			console.log('出错'+ err)
+			return
+		}
+		console.log('结果'+ docs)
+		res.json(docs)
+	})
 })
 
 app.get('*', function(req, res) {
