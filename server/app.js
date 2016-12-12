@@ -1,24 +1,12 @@
 var express = require('express')
 var fs = require('fs')
 var path = require('path')
-var app = express()
 var mime = require('mime')
-
 var db = require('./db.js')
-// console.log(db)
-
-// new db.Article()
+var app = express()
 
 var resolve = file => path.resolve(__dirname, file)
-
 app.use('/dist', express.static(resolve('../dist')))
-
-
-// var articleList = {
-// 	title: '这是标题6', 
-// 	content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', 
-// 	date: new Date()
-// }
 
 
 // 保存操作
@@ -33,7 +21,6 @@ app.get('/articleList', function(req, res){
 			console.log('出错'+ err)
 			return
 		}
-		// console.log('结果'+ docs)
 		res.json(docs)
 	})
 })
@@ -49,7 +36,7 @@ app.get('/articleDetails/:id', function(req, res){
 
 
 app.get('*', function(req, res) {
-    const html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8')
+    var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8')
     res.send(html)
 })
 
