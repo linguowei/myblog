@@ -2,9 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import {Button} from 'element-ui'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
+Vue.use(Button)
 
 const router = new VueRouter({
 	mode: 'history',
