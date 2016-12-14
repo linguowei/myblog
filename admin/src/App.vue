@@ -16,12 +16,12 @@
                 </li>
             </ul>
         </div>
-        <div>
+        <div class="router-view">
             <transition name="fade" mode="out-in">
+                <h1 v-if="this.$route.path == '/admin'">赶紧来写文章啦，不写就来不及了</h1>
                 <router-view @saveDraft="saveDraft"></router-view>
             </transition>
         </div>
-        
     </div>
 </template>
 
@@ -34,9 +34,7 @@ export default {
         }
     },
     mounted: function(){
-        this.$on('test', function(value){
-            console.log(value)
-        })
+        
     },
     methods: {
         addArticle: function(){
@@ -128,5 +126,10 @@ body {
 .article-instructions > img {
     vertical-align:middle;
     cursor: pointer;
+}
+.router-view {
+    position: relative;
+    height: 100%;
+    padding-left: 321px;
 }
 </style>

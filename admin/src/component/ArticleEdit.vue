@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="article-edit">
+		<!-- <div class="article-edit"> -->
             <div class="article-title">
                 <input type="text" v-model="articleTitle">
             </div>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <textarea id="editor"></textarea>
-        </div>
+        <!-- </div> -->
 	</div>
 </template>
 
@@ -105,11 +105,11 @@ export default {
 .fade-enter, .fade-leave-active {
     opacity: 0
 }
-.article-edit {
+/*.article-edit {
     position: relative;
     height: 100%;
     padding-left: 321px;
-}
+}*/
 .article-title {
     height: 45px;
     border-bottom: 1px solid #f1f1f1;
