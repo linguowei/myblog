@@ -7,99 +7,50 @@
             <div class="article-instructions">
                 <img src="./assets/article-title.png" height="20" width="20">
                 <span>文章列表</span>
-                <img src="./assets/add.png" height="17" width="17">
+                <img src="./assets/add.png" height="17" width="17" @click="addArticle">
             </div>
             <ul v-articleListHeight>
-                <li v-for="item in list">
-                    <h3>文章标题哈哈哈文章标题哈哈哈</h3>
-                    <p>2016-09-07</p>
+                <li v-for="item in articleList">
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.time}}</p>
                 </li>
             </ul>
         </div>
-        <div class="article-edit">
-            <div class="article-title">
-                <input type="text" value="请输入文章标题">
-            </div>
-            <div class="article-toolbar">
-                <div class="label">
-                    
-                </div>
-                <div class="action-button">
-                    <el-button class="delect-draft" size="small">保存草稿</el-button>
-                    <el-button class="publish-article" type="primary" size="small">发布文章</el-button>
-                </div>
-            </div>
-            <textarea  
-                id="editor">
-            </textarea>
+        <div>
+            <transition name="fade" mode="out-in">
+                <router-view @saveDraft="saveDraft"></router-view>
+            </transition>
         </div>
+        
     </div>
 </template>
 
 <script>
-import SimpleMDE from 'simplemde'
-import './assets/simplemde.min.css'
 export default {
     name: 'app',
     data () {
         return {
-            content:{
-                type:String,
-                required: true,
-                twoWay: true
-            },
-            list: [
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-            ]
+            articleList: []
         }
     },
     mounted: function(){
-        var smde = new SimpleMDE({
-            element: document.getElementById('editor'),
-        });
+        this.$on('test', function(value){
+            console.log(value)
+        })
+    },
+    methods: {
+        addArticle: function(){
+            this.$router.push('/articleEdit')
+        },
+        saveDraft: function(value){
+            this.articleList.push(value)
+            console.log(value) 
+        }
     },
     directives: {
         articleListHeight: {
             bind: function(el){
-                var height = window.innerHeight - 90
+                var height = window.innerHeight - 60
                 el.style.maxHeight = height + 'px'
             }
         }
@@ -177,52 +128,5 @@ body {
 .article-instructions > img {
     vertical-align:middle;
     cursor: pointer;
-}
-.article-edit {
-    position: relative;
-    height: 100%;
-    padding-left: 321px;
-}
-.article-title {
-    height: 45px;
-    border-bottom: 1px solid #f1f1f1;
-}
-.article-title > input {
-    border: none;
-    outline-style: none;
-    width: 100%;
-    height: 43px;
-    padding-left: 10px;
-    font-size: 20px;
-}
-.article-toolbar {
-    height: 60px;
-    line-height: 60px;
-}
-.label {
-    width: 50%;
-    padding-left: 10px;
-    float: left;
-}
-.action-button {
-    min-width: 60px;
-    float: right;
-    margin-right: 15px; 
-}
-.CodeMirror {
-    border-bottom: none!important;
-    border-left: none!important;
-    border-right: none!important;
-    border-top: 1px solid #f1f1f1!important;
-}
-.editor-toolbar {
-    border-top-left-radius: 0!important;
-    border-top-right-radius: 0!important;
-    border-left: none!important;
-    border-right: none!important;
-    border-top: 1px solid #f1f1f1!important;
-}
-.editor-statusbar {
-    display: none;
 }
 </style>

@@ -8,7 +8,6 @@ var app = express()
 var resolve = file => path.resolve(__dirname, file)
 app.use('/dist', express.static(resolve('../dist')))
 
-
 // 保存操作
 // new db.Article(articleList).save(function(error){
 // 	console.log(error ? 'error' : 'success')
@@ -34,6 +33,11 @@ app.get('/articleDetails/:id', function(req, res){
 	})
 })
 
+// 后台管理页
+app.get('/admin', function(req, res) {
+    var html = fs.readFileSync(resolve('../' + 'admin.html'), 'utf-8')
+    res.send(html)
+})
 
 app.get('*', function(req, res) {
     var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8')
