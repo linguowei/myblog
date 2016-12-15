@@ -1,7 +1,18 @@
 <template>
     <div id="app">
         <div class="left-sidebar">
-            
+            <div class="admin-logo">
+                <img src="./assets/logo.png" width="40" height="40">
+            </div>
+            <div class="article-logo">
+                <img src="./assets/article.png" height="50" width="50">
+            </div>
+            <div class="label-logo">
+                <img src="./assets/label.png" height="50" width="50">
+            </div>
+            <div class="use-logo">
+                <img src="./assets/use.png" height="50" width="50">
+            </div>
         </div>
         <div class="article-list">
             <div class="article-instructions">
@@ -11,7 +22,7 @@
             </div>
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
-                    <h3>{{item.title}}</h3>
+                    <h3 class="articlePreview-title">{{item.title}}</h3>
                     <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>
                 </li>
             </ul>
@@ -55,7 +66,7 @@ export default {
             return format;
         }
         this.$http.get('/articleList').then(
-            respone => this.articleList = respone.body,
+            respone => this.articleList = respone.body.reverse(),
             respone => console.log(respone)
         )
     },
@@ -66,7 +77,7 @@ export default {
         // 接受ArtcleEdit组件派发的事件去获取最新的文章列表
         refreshArticleList: function(){
             this.$http.get('/articleList').then(
-                respone => this.articleList = respone.body,
+                respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )
         }
@@ -74,7 +85,7 @@ export default {
     directives: {
         articleListHeight: {
             bind: function(el){
-                var height = window.innerHeight - 60
+                var height = window.innerHeight - 80
                 el.style.maxHeight = height + 'px'
             }
         }
@@ -106,6 +117,45 @@ body {
     left: 0;
     border-right: 1px solid #f1f1f1;
     background-color: #f8f8f8;
+}
+.admin-logo {
+    width: 70px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+.admin-logo > img {
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+}
+.article-logo {
+    height: 130px;
+    margin-top: 50px;
+}
+.article-logo > img {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.label-logo {
+    height: 130px;
+    margin-top: 20px;
+}
+.label-logo > img {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.use-logo {
+    height: 130px;
+    margin-top: 20px;
+}
+.use-logo > img {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
 }
 .article-list {
     width: 230px;
@@ -139,8 +189,8 @@ body {
     font-size: 12px;
 }
 .article-instructions {
-    height: 45px;
-    line-height: 45px;
+    height: 65px;
+    line-height: 65px;
     padding-left: 20px;
     border-bottom: 1px solid #f1f1f1;
     color: #666;
@@ -157,5 +207,8 @@ body {
     position: relative;
     height: 100%;
     padding-left: 321px;
+}
+.articlePreview-title {
+    color: #20a0ff;
 }
 </style>
