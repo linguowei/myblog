@@ -6,12 +6,10 @@ var mime = require('mime')
 var db = require('./db.js')
 var app = express()
 
-
-
 var resolve = file => path.resolve(__dirname, file)
 app.use('/dist', express.static(resolve('../dist')))
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // 保存操作
 // new db.Article(articleList).save(function(error){
