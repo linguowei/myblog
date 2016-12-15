@@ -12,7 +12,9 @@ var userSchema = new mongoose.Schema({
 var articleSchema = new mongoose.Schema({
 	title: String,
 	date: Date,
-	content: String
+	content: String,
+	state: String,
+	label: String,
 })
 
 var Models = {

@@ -2,16 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
-import {Button} from 'element-ui'
+import {Button, Message, Notification} from 'element-ui'
 import articleEdit from './component/ArticleEdit.vue'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(Button)
+// Vue.use(Message)
+// Vue.use(Notification)
 
 const router = new VueRouter({
 	mode: 'history',
-	base: '__dirname',
 	routes: [
 		{path: '/articleEdit', component: articleEdit},
 		// {path: '/home', component: home},

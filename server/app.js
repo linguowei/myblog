@@ -1,12 +1,17 @@
 var express = require('express')
 var fs = require('fs')
 var path = require('path')
+var bodyParser = require('body-parser');
 var mime = require('mime')
 var db = require('./db.js')
 var app = express()
 
+
+
 var resolve = file => path.resolve(__dirname, file)
 app.use('/dist', express.static(resolve('../dist')))
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // 保存操作
 // new db.Article(articleList).save(function(error){
@@ -33,10 +38,22 @@ app.get('/articleDetails/:id', function(req, res){
 	})
 })
 
-// 后台管理页
+// 后台管理页路由
 app.get('/admin', function(req, res) {
     var html = fs.readFileSync(resolve('../' + 'admin.html'), 'utf-8')
     res.send(html)
+})
+
+// 文章保存路由
+app.post('/saveArticle', function(req, res){
+	new db.Article(req.body.articleInformation).save(function(error){
+		if (error) {
+			res.send('保存失败')
+			return
+		}
+		res.send('保存成功')
+	})
+
 })
 
 app.get('*', function(req, res) {
