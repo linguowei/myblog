@@ -10,8 +10,11 @@
             <div class="label-logo">
                 <img src="./assets/label.png" height="50" width="50">
             </div>
-            <div class="use-logo">
+            <div class="use-logo" @click="open">
                 <img src="./assets/use.png" height="50" width="50">
+            </div>
+            <div class="sidebar-switch">
+                <img src="./assets/left.png" height="50" width="50">
             </div>
         </div>
         <div class="article-list">
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui';
 export default {
     name: 'app',
     data () {
@@ -80,6 +84,10 @@ export default {
                 respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )
+        },
+        open: function(){
+            console.log(this)
+            Message.success('这是一条消息提示');
         }
     },
     directives: {
@@ -131,7 +139,7 @@ body {
     margin: 0 auto;
 }
 .article-logo {
-    height: 130px;
+    height: 100px;
     margin-top: 50px;
 }
 .article-logo > img {
@@ -140,7 +148,7 @@ body {
     cursor: pointer;
 }
 .label-logo {
-    height: 130px;
+    height: 100px;
     margin-top: 20px;
 }
 .label-logo > img {
@@ -149,13 +157,23 @@ body {
     cursor: pointer;
 }
 .use-logo {
-    height: 130px;
+    height: 100px;
     margin-top: 20px;
 }
 .use-logo > img {
     display: block;
     margin: 0 auto;
     cursor: pointer;
+}
+.sidebar-switch {
+    height: 100px;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+.sidebar-switch > img {
+    display: block;
+    margin: 0 auto;
 }
 .article-list {
     width: 230px;
