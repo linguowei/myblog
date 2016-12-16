@@ -22,6 +22,7 @@ import '../assets/simplemde.css'
 import marked from 'marked';
 import highlight from 'highlight.js'
 import '../assets/atom-one-light.css'
+import { Message } from 'element-ui';
 export default {
 	data () {
         return {
@@ -92,11 +93,13 @@ export default {
             	articleInformation: obj
             }).then(
             	respone => {
-            		console.log('文章保存成功')
+            		Message.success('文章保存成功')
             		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
             		self.$emit('saveArticleInformation')
             	},
-            	respone => console.log('文章保存失败')
+            	respone => {
+            		Message.error('文章保存失败')
+            	}
             )
         },
         // 发布文章
@@ -113,11 +116,11 @@ export default {
             	articleInformation: obj
             }).then(
             	respone => {
-            		console.log('文章保存成功')
+            		Message.success('文章保存成功')
             		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
             		self.$emit('saveArticleInformation')
             	},
-            	respone => console.log('文章保存失败')
+            	respone => Message.error('文章保存失败')
             )
         }
     },

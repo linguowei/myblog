@@ -10,7 +10,7 @@
             <div class="label-logo">
                 <img src="./assets/label.png" height="50" width="50">
             </div>
-            <div class="use-logo" @click="open">
+            <div class="use-logo">
                 <img src="./assets/use.png" height="50" width="50">
             </div>
             <div class="sidebar-switch">
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { Message } from 'element-ui';
 export default {
     name: 'app',
     data () {
@@ -85,10 +84,6 @@ export default {
                 respone => console.log(respone)
             )
         },
-        open: function(){
-            console.log(this)
-            Message.success('这是一条消息提示');
-        }
     },
     directives: {
         articleListHeight: {
