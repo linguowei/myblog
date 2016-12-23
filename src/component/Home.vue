@@ -26,7 +26,7 @@ export default {
     	}
     },
     mounted: function(){
-    	this.$http.get('/articleList').then(
+    	this.$http.get('/api/articleList').then(
     		respone => {
     			this.articleList = respone.body
     		},

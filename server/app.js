@@ -1,13 +1,13 @@
-var express = require('express')
-var fs = require('fs')
-var path = require('path')
+var express = require('express');
+var fs = require('fs');
+var path = require('path');
 var bodyParser = require('body-parser');
-var mime = require('mime')
-var db = require('./db.js')
-var app = express()
+var mime = require('mime');
+var db = require('./db.js');
+var app = express();
 
-var resolve = file => path.resolve(__dirname, file)
-app.use('/dist', express.static(resolve('../dist')))
+var resolve = file => path.resolve(__dirname, file);
+app.use('/dist', express.static(resolve('../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -17,48 +17,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // })
 
 // 查询文章列表路由
-app.get('/articleList', function(req, res){
+app.get('/api/articleList', function(req, res){
 	db.Article.find({}, function(err, docs){
 		if (err) {
-			console.log('出错'+ err)
+			console.log('出错'+ err);
 			return
 		}
 		res.json(docs)
 	})
-})
+});
 // 查询文章详情路由
-app.get('/articleDetails/:id', function(req, res){
+app.get('/api/articleDetails/:id', function(req, res){
 	db.Article.findOne({_id: req.params.id}, function(err, docs){
 		if (err) {
 			return
 		}
 		res.send(docs)
 	})
-})
+});
+
+// 文章保存路由
+app.post('/api/saveArticle', function(req, res){
+	new db.Article(req.body.articleInformation).save(function(error){
+		if (error) {
+			res.send('保存失败');
+			return
+		}
+		res.send()
+	})
+});
 
 // 后台管理页路由
 app.get('/admin', function(req, res) {
-    var html = fs.readFileSync(resolve('../' + 'admin.html'), 'utf-8')
-    res.send(html)
-})
+	var html = fs.readFileSync(resolve('../' + 'admin.html'), 'utf-8');
+	res.send(html)
+});
 
-// 文章保存路由
-app.post('/saveArticle', function(req, res){
-	new db.Article(req.body.articleInformation).save(function(error){
-		if (error) {
-			res.send('保存失败')
-			return
-		}
-		res.send('保存成功')
-	})
-
-})
-
+// 博客首页
 app.get('*', function(req, res) {
-    var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8')
+    var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8');
     res.send(html)
-})
+});
 
-app.listen(8089, function() {
-    console.log("应用实例，访问地址为 localhost:8089")
-})
+app.listen(9000, function() {
+    console.log("应用实例，访问地址为 localhost:9000")
+});

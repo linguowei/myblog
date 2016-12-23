@@ -1,11 +1,11 @@
 <template>
-	<div>
+	<div class="articel-edit-wrap">
         <div class="article-title">
             <input type="text" v-model="articleTitle">
         </div>
         <div class="article-toolbar">
             <div class="label">
-                
+
             </div>
             <div class="action-button">
                 <el-button size="small" @click="saveDraft">保存草稿</el-button>
@@ -69,7 +69,7 @@ export default {
                     highlight: function (code) {
                         return highlight.highlightAuto(code).value;
                     }
-                }); 
+                });
             },
         });
         smde.codemirror.on("change", function(){
@@ -89,16 +89,18 @@ export default {
                 state: 'draft',
                 label: '技术分享',
             }
-            this.$http.post('/saveArticle', {
+            this.$http.post('/api/saveArticle', {
             	articleInformation: obj
             }).then(
             	respone => {
             		Message.success('文章保存成功')
             		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
             		self.$emit('saveArticleInformation')
+            		console.log(respone)
             	},
             	respone => {
             		Message.error('文章保存失败')
+            		console.log(respone)
             	}
             )
         },
@@ -112,7 +114,7 @@ export default {
                 state: 'publish',
                 label: '技术分享',
             }
-            this.$http.post('/saveArticle', {
+            this.$http.post('/api/saveArticle', {
             	articleInformation: obj
             }).then(
             	respone => {
@@ -125,7 +127,7 @@ export default {
         }
     },
     directives: {
-        
+
     }
 }
 </script>
@@ -137,6 +139,10 @@ export default {
 .fade-enter, .fade-leave-active {
     opacity: 0
 }
+.articel-edit-wrap {
+    width: 100%;
+    height: 100%;
+}
 .article-title {
     height: 45px;
     border-bottom: 1px solid #f1f1f1;
@@ -144,7 +150,7 @@ export default {
 .article-title > input {
     border: none;
     outline-style: none;
-    width: 100%;
+    width: 97%;
     height: 43px;
     padding-left: 10px;
     font-size: 20px;
@@ -159,9 +165,9 @@ export default {
     float: left;
 }
 .action-button {
-    min-width: 60px;
+    min-width: 120px;
     float: right;
-    margin-right: 15px; 
+    padding-right: 20px;
 }
 .CodeMirror {
     border-bottom: none!important;

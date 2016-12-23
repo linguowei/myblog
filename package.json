@@ -10,6 +10,7 @@
     "server": "supervisor server/app.js"
   },
   "dependencies": {
+    "bluebird": "^3.4.7",
     "element-ui": "^1.0.5",
     "express": "^4.14.0",
     "mime": "^1.3.4",

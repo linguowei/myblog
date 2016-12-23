@@ -1,6 +1,5 @@
 var mongoose = require('mongoose')
-
-// var uri = 'mongodb://localhost/weiweiblog'
+mongoose.Promise = require('bluebird')
 
 mongoose.connect('mongodb://localhost/weiweiblog')
 

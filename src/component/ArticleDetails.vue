@@ -16,7 +16,7 @@ export default {
 	},
 	mounted: function(){
 		var id = this.$route.params.id
-		this.$http.get('/articleDetails/'+ id)
+		this.$http.get('/api/articleDetails/'+ id)
 		.then(
 			respone => {
 				this.title = respone.body.title,

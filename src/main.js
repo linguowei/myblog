@@ -11,10 +11,10 @@ import articleDetails from './component/ArticleDetails.vue'
 import classify from './component/Classify.vue'
 import label from './component/Label.vue'
 
-Vue.use(VueRouter)
-Vue.use(VueResource)
-Vue.use(Tooltip)
-Vue.use(input)
+Vue.use(VueRouter);
+Vue.use(VueResource);
+Vue.use(Tooltip);
+Vue.use(input);
 
 const router = new VueRouter({
 	mode: 'history',
@@ -27,7 +27,7 @@ const router = new VueRouter({
 		{path: '/about', component: about},
 		{path: '/articleDetails:id', component: articleDetails},
 		{path: '/classify', component: classify},
-		{path: '/label', component: label},
+		{path: '/label', component: label}
 	]
 })
 
