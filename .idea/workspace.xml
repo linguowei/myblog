@@ -2,24 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14db2e44-1bbc-4e04-bb7b-41c225cb6c11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/linguowei.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/src/component/ArticleLabel.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/src/component/ArticleList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/package.json" afterPath="$PROJECT_DIR$/admin/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/App.vue" afterPath="$PROJECT_DIR$/admin/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/component/ArticleEdit.vue" afterPath="$PROJECT_DIR$/admin/src/component/ArticleEdit.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/main.js" afterPath="$PROJECT_DIR$/admin/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/webpack.config.js" afterPath="$PROJECT_DIR$/admin/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app.js" afterPath="$PROJECT_DIR$/server/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/db.js" afterPath="$PROJECT_DIR$/server/db.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/ArticleDetails.vue" afterPath="$PROJECT_DIR$/src/component/ArticleDetails.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/Home.vue" afterPath="$PROJECT_DIR$/src/component/Home.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/linguowei.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/myblog.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="myblog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,8 +70,8 @@
       <file leaf-file-name="ArticleLabel.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/src/component/ArticleLabel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+            <state relative-caret-position="323">
+              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -368,12 +361,12 @@
       <workItem from="1482311166889" duration="124000" />
       <workItem from="1482402072858" duration="772000" />
       <workItem from="1482403261677" duration="2032000" />
-      <workItem from="1482420385123" duration="11675000" />
+      <workItem from="1482420385123" duration="11814000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23526000" />
+    <option name="totallyTimeSpent" value="23665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1276" height="777" extended-state="0" />
@@ -766,8 +759,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/component/ArticleLabel.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        <state relative-caret-position="323">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
           <folding />
         </state>
       </provider>
