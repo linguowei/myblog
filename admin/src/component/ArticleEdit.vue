@@ -118,11 +118,11 @@ export default {
             	articleInformation: obj
             }).then(
             	respone => {
-            		Message.success('文章保存成功')
+            		Message.success('文章发布成功')
             		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
             		self.$emit('saveArticleInformation')
             	},
-            	respone => Message.error('文章保存失败')
+            	respone => Message.error('文章发布失败')
             )
         }
     },

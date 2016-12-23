@@ -40,7 +40,6 @@ export default {
         },
         // 文章标签路由
         articleLabel: function(){
-        console.log('test')
             this.$router.push('/atricleLabel')
         }
     },

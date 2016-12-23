@@ -9,7 +9,6 @@
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
                     <h3 class="articlePreview-title">{{item.title}}</h3>
-
                     <!--<p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>-->
                 </li>
             </ul>
@@ -17,7 +16,7 @@
         <div class="router-view">
             <transition name="fade" mode="out-in">
                 <h1 v-if="this.$route.path == '/admin'">赶紧来写文章啦，不写就来不及了</h1>
-                <router-view @saveArticleInformation="refreshArticleList"></router-view>
+                <router-view @saveArticleInformation="refreshArticleList" @emitArticleLabelList="onArticleLabelLis"></router-view>
             </transition>
         </div>
     </div>
@@ -58,6 +57,9 @@ export default{
             }
             return format;
         }
+
+        console.log(this.$route.query.lebelTitle)
+
         this.$http.get('/api/articleList').then(
             respone => this.articleList = respone.body.reverse(),
             respone => console.log(respone)
@@ -75,6 +77,9 @@ export default{
                 respone => console.log(respone)
             )
         },
+        onArticleLabelLis: function(title){
+            console.log(title)
+        }
     },
     directives: {
         articleListHeight: {
