@@ -6,6 +6,7 @@ import {Button} from 'element-ui'
 import articleList from './component/ArticleList.vue'
 import articleEdit from './component/ArticleEdit.vue'
 import atricleLabel from './component/ArticleLabel.vue'
+import personalCenter from './component/PersonalCenter.vue'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -20,7 +21,7 @@ const router = new VueRouter({
             ]
 		},
 		{path: '/atricleLabel', component: atricleLabel},
-		// {path: '/search', component: search},
+		{path: '/personalCenter', component: personalCenter},
 		// {path: '/about', component: about},
 		// {path: '/articleDetails:id', component: articleDetails},
 		// {path: '/classify', component: classify},

@@ -10,7 +10,7 @@
             <div class="label-logo" @click="articleLabel">
                 <img src="./assets/label.png" height="50" width="50">
             </div>
-            <div class="use-logo">
+            <div class="use-logo" @click="personalCenter">
                 <img src="./assets/use.png" height="50" width="50">
             </div>
         </div>
@@ -41,6 +41,10 @@ export default {
         // 文章标签路由
         articleLabel: function(){
             this.$router.push('/atricleLabel')
+        },
+        // 个人中心
+        personalCenter: function(){
+            this.$router.push('/personalCenter')
         }
     },
     directives: {

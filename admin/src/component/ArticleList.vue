@@ -58,12 +58,15 @@ export default{
             return format;
         }
 
-        console.log(this.$route.query.lebelTitle)
+        if (this.$route.query.lebelTitle) {
+            console.log(this.$route.query.lebelTitle)
+        } else {
+            this.$http.get('/api/articleList').then(
+                respone => this.articleList = respone.body.reverse(),
+                respone => console.log(respone)
+            )
+        }
 
-        this.$http.get('/api/articleList').then(
-            respone => this.articleList = respone.body.reverse(),
-            respone => console.log(respone)
-        )
     },
     methods: {
         // 文章编辑页路由
