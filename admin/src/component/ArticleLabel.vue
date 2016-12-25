@@ -4,7 +4,7 @@
             <div class="article-instructions">
                 <img src="../assets/article-title.png" height="20" width="20">
                 <span>标签管理</span>
-                <img src="../assets/add.png" height="17" width="17">
+                <img src="../assets/add.png" height="17" width="17" @click="addArticLabel">
             </div>
             <ul v-articleListHeight>
                 <li v-for="item in articleLabel" @click="labelClassification(item.titel)">
@@ -32,6 +32,9 @@ export default{
     methods: {
         labelClassification: function(title){
             this.$router.push({path: 'articleList', query: {lebelTitle: title}})
+        },
+        addArticLabel: function(){
+
         }
     },
     directives: {
