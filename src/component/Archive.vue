@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<h1>this is archive</h1>
+		<div class="content-panel-header">
+			<h4>归档</h4>
+		</div>
+		<div class="content-panel-content">
+            <h1>this is archive</h1>
+		</div>
 	</div>
 </template>
 

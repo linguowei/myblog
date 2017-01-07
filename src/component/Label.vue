@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<h1>这是文章标签</h1>
+		<div class="content-panel-header">
+			<h4>标签</h4>
+		</div>
+		<div class="content-panel-content">
+            <h1>这是文章标签</h1>
+		</div>
 	</div>
 </template>
 

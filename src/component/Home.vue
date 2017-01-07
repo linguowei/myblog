@@ -1,13 +1,18 @@
 <template>
 	<div>
-		<ul>
-			<li class="article-wrap" v-for="item in articleList">
-				<h3 @click="articleDetails(item._id)">{{item.title}}</h3>
-				<p v-compiledMarkdown>{{item.articleContent}}</p>
-				<div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
-				<div class="article-underline"></div>
-			</li>
-		</ul>
+        <div class="content-panel-header">
+            <h4>最新文章</h4>
+        </div>
+        <div class="content-panel-content">
+            <ul>
+                <li class="article-wrap" v-for="item in articleList">
+                    <h3 @click="articleDetails(item._id)">{{item.title}}</h3>
+                    <p v-compiledMarkdown>{{item.articleContent}}</p>
+                    <div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
+                    <div class="article-underline"></div>
+                </li>
+            </ul>
+        </div>
 	</div>
 </template>
 
@@ -61,8 +66,8 @@ export default {
 
 <style>
 .article-wrap {
-	padding: 5px 10px 20px 10px;
-	height: 190px;
+	padding: 10px;
+	height: 170px;
 }
 .article-wrap > h3 {
 	font-size: 24px;

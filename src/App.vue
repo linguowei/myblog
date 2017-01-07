@@ -52,17 +52,9 @@
             </div>
         </div>
         <div class="content-panel">
-            <div class="content-panel-header">
-                <h4 v-if="this.$route.path === '/' || this.$route.path === '/home'">最新文章</h4>
-                <h4 v-if="this.$route.path === '/archive'">归档</h4>
-                <h4 v-if="this.$route.path === '/search'"></h4>
-                <h4 v-if="this.$route.path === '/about'">关于我</h4>
-            </div>
-            <div class="content-panel-content">
-                <transition name="fade" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </div>
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>

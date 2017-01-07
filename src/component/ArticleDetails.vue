@@ -1,9 +1,13 @@
 <template>
 	<div>
-		<div @click="goBack">返回</div>
-        <div v-for="item in list">
-            <h3>{{item.title}}</h3>
-            <div v-compiledMarkdown>{{item.articleContent}}</div>
+        <div class="content-panel-header">
+            <h4 @click="goBack">返回</h4>
+        </div>
+        <div class="content-panel-content">
+            <div v-for="item in list">
+                <h3>{{item.title}}</h3>
+                <div v-compiledMarkdown>{{item.articleContent}}</div>
+            </div>
         </div>
 	</div>
 </template>
@@ -26,13 +30,10 @@ export default {
 		.then(
 			respone => {
 			    this.list.push(respone.body)
-				this.title = respone.body.title,
-				this.articleContent = respone.body.articleContent,
-				console.log(respone.body)
 			},
 			respone => console.log('错误'+respone)
 		)
-		console.log(this.$route.params.id)
+		console.log(this.$route.path)
 	},
 	methods: {
 		goBack: function(){
@@ -42,7 +43,6 @@ export default {
 	directives: {
         compiledMarkdown: {
             bind: function(el){
-                console.log(el.innerText)
                 el.innerHTML = marked(el.innerText)
             }
         }
