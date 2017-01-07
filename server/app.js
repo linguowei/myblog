@@ -47,17 +47,17 @@ app.post('/api/saveArticle', function(req, res){
 	})
 });
 
-// 后台管理页路由
+// 后台管理页路
 app.get('/admin', function(req, res) {
 	var html = fs.readFileSync(resolve('../' + 'admin.html'), 'utf-8');
 	res.send(html)
 });
 
 // 博客首页
-// app.get('*', function(req, res) {
-//     var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8');
-//     res.send(html)
-// });
+app.get('*', function(req, res) {
+    var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8');
+    res.send(html)
+});
 
 app.listen(9000, function() {
     console.log("应用实例，访问地址为 localhost:9000")

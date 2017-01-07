@@ -126,11 +126,22 @@ export default {
 .fade-enter, .fade-leave-active {
     opacity: 0
 }
+pre {
+    background-color: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+}
+blockquote {
+    border-left: 10px #e4e9eb solid;
+    background-color: #f5f5f5;
+    padding: 15px 20px;
+}
 * {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
+    font-faminly: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
 }
 a:visited, a:link, a:active {
     color: #545455;

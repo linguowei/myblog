@@ -3,7 +3,7 @@
 		<ul>
 			<li class="article-wrap" v-for="item in articleList">
 				<h3 @click="articleDetails(item._id)">{{item.title}}</h3>
-				<p>{{item.content}}</p>
+				<p v-compiledMarkdown>{{item.articleContent}}</p>
 				<div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
 				<div class="article-underline"></div>
 			</li>
@@ -12,6 +12,9 @@
 </template>
 
 <script>
+import marked from 'marked';
+import highlight from 'highlight.js'
+import '../assets/atom-one-light.css'
 export default {
     data () {
     	return {
@@ -28,10 +31,30 @@ export default {
     mounted: function(){
     	this.$http.get('/api/articleList').then(
     		respone => {
-    			this.articleList = respone.body
+    		    this.articleList = respone.body
     		},
     		respone => console.log('erroe'+respone)
-    	)
+    	),
+    	marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code) {
+                return highlight.highlightAuto(code).value;
+            }
+        });
+    },
+    directives: {
+        compiledMarkdown: {
+            bind: function(el){
+                el.innerHTML = marked(el.innerText)
+            }
+        }
     }
 }
 </script>

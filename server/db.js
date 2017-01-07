@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema({
 var articleSchema = new mongoose.Schema({
 	title: String,
 	date: Date,
-	content: String,
+	articleContent: String,
 	state: String,
 	label: String,
 })
