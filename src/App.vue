@@ -122,11 +122,13 @@ pre {
     background-color: #f5f5f5;
     padding: 0.5rem 1rem;
     border-radius: 3px;
+    margin: 10px 0 10px 0;
 }
 blockquote {
     border-left: 10px #e4e9eb solid;
     background-color: #f5f5f5;
     padding: 15px 20px;
+    margin: 10px 0 10px 0;
 }
 * {
     margin: 0;
@@ -141,6 +143,9 @@ a:visited, a:link, a:active {
 }
 body {
     background-color: #f5f5f5;
+}
+strong {
+    color: #579eff;
 }
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

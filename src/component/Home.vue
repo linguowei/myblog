@@ -6,9 +6,9 @@
         <div class="content-panel-content">
             <ul>
                 <li class="article-wrap" v-for="item in articleList">
-                    <h3 @click="articleDetails(item._id)">{{item.title}}</h3>
+                    <div class="atticle-title atticle-title-hover" @click="articleDetails(item._id)">{{item.title}}</div>
                     <p v-compiledMarkdown>{{item.articleContent}}</p>
-                    <div class="article-date">{{item.date.substring(0,4)}}年{{item.date.substring(5,7)}}月{{item.date.substring(8,10)}}日</div>
+                    <div class="article-date">{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</div>
                     <div class="article-underline"></div>
                 </li>
             </ul>
@@ -30,13 +30,32 @@ export default {
     methods: {
     	articleDetails: function(id){
     		this.$router.push('/articleDetails'+id+'')
-    		// console.log(title)
     	}
     },
     mounted: function(){
+        Date.prototype.format = function(format) {
+            var o = {
+                "M+": this.getMonth() + 1, //month
+                "d+": this.getDate(), //day
+                "h+": this.getHours(), //hour
+                "m+": this.getMinutes(), //minute
+                "s+": this.getSeconds(), //second
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
+            }
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1,(this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o){
+                if (new RegExp("(" + k + ")").test(format)){
+                    format = format.replace(RegExp.$1,RegExp.$1.length == 1 ? o[k] :("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
+        },
     	this.$http.get('/api/articleList').then(
     		respone => {
-    		    this.articleList = respone.body
+    		    this.articleList = respone.body.reverse();
     		},
     		respone => console.log('erroe'+respone)
     	),
@@ -58,6 +77,12 @@ export default {
         compiledMarkdown: {
             bind: function(el){
                 el.innerHTML = marked(el.innerText)
+                if(el.querySelector('pre')){
+                    el.querySelector('pre').style.display = "none"
+                }
+                if(el.querySelector('blockquote')){
+                    el.querySelector('blockquote').style.display = "none"
+                }
             }
         }
     }
@@ -69,28 +94,38 @@ export default {
 	padding: 10px;
 	height: 170px;
 }
-.article-wrap > h3 {
-	font-size: 24px;
-	height: 40px;
-	line-height: 40px;
+.article-wrap > .atticle-title {
+	font-size: 22px;
 	cursor: pointer;
+	border-left: 3px #a0a0a1 solid;
+	padding-left: 10px;
+	color: #2c3e50;
+	font-weight: bold;
+}
+.atticle-title-hover:hover {
+    background-color: #fafafa;
 }
 .article-wrap > .article-underline {
 	height: 1px;
 	background-color: #f6f6f6;
 }
 .article-wrap > p {
-	height: 90px;
+	height: 80px;
+	line-height: 20px;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	overflow : hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+    word-break: break-all
 }
 
 .article-date {
 	color: #a5a5a5;
 	font-size: 14px;
+	padding-bottom: 10px;
 }
 </style>

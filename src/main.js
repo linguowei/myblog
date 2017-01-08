@@ -17,7 +17,6 @@ Vue.use(input);
 
 const router = new VueRouter({
 	mode: 'history',
-	base: '__dirname',
 	routes: [
 		{path: '/', component: home},
 		{path: '/home', component: home},

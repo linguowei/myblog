@@ -5,7 +5,7 @@
         </div>
         <div class="content-panel-content">
             <div v-for="item in list">
-                <h3>{{item.title}}</h3>
+                <div class="atticle-title">{{item.title}}</div>
                 <div v-compiledMarkdown>{{item.articleContent}}</div>
             </div>
         </div>
@@ -50,4 +50,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.atticle-title {
+    font-size: 22px;
+	cursor: pointer;
+	border-left: 3px #a0a0a1 solid;
+	padding-left: 10px;
+	color: #2c3e50;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+</style>
