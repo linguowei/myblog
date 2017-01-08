@@ -56,18 +56,19 @@ export default{
             }
             return format;
         }
-
-        if (this.$route.query.lebelTitle) {
-            console.log(this.$route.query.lebelTitle)
-        } else {
+    },
+    created () {
+        // 组件创建完后获取数据，
+        // 此时 data 已经被 observed 了
+        this.fetchData()
+    },
+    methods: {
+        fetchData: function(){
             this.$http.get('api/admin/articleList').then(
                 respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )
-        }
-
-    },
-    methods: {
+        },
         // 文章编辑页路由
         addArticle: function(){
             this.$router.push('/articleList/articleEdit')
@@ -86,6 +87,9 @@ export default{
         onArticleLabelLis: function(title){
             console.log(title)
         }
+    },
+    watch: {
+        '$route': 'fetchData'
     },
     directives: {
         articleListHeight: {

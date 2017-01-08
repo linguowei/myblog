@@ -16,7 +16,6 @@ Vue.use(Tooltip);
 Vue.use(input);
 
 const router = new VueRouter({
-	mode: 'history',
 	routes: [
 		{path: '/', component: home},
 		{path: '/home', component: home},

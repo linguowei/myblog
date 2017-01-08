@@ -14,7 +14,6 @@ Vue.use(VueRouter)
 Vue.use(Button)
 
 const router = new VueRouter({
-	mode: 'history',
 	routes: [
 		{path: '/articleList', component: articleList,
 		    children: [
@@ -30,8 +29,6 @@ const router = new VueRouter({
 		// {path: '/label', component: label},
 	]
 })
-
-// window.a = Vue
 
 new Vue({
   	el: '#app',

@@ -15,18 +15,14 @@ export default{
     data(){
         return{
            list: [],
-           id: this.$route.params.id
         }
     },
+    created () {
+        // 组件创建完后获取数据，
+        // 此时 data 已经被 observed 了
+        this.fetchData()
+    },
     mounted: function(){
-        console.log('11')
-		this.$http.get('/api/articleDetails/'+ this.id)
-		.then(
-			respone => {
-			    this.list.push(respone.body)
-			},
-			respone => console.log('错误'+respone)
-		)
 		marked.setOptions({
             renderer: new marked.Renderer(),
             gfm: true,
@@ -41,9 +37,11 @@ export default{
             }
         });
     },
-    watch: {
-        id: function(newId){
-            this.$http.get('/api/articleDetails/'+ newId)
+    methods: {
+        fetchData: function(){
+            var id = this.$route.params.id
+            this.list = []
+            this.$http.get('/api/articleDetails/'+ id)
             .then(
                 respone => {
                     this.list.push(respone.body)
@@ -51,6 +49,9 @@ export default{
                 respone => console.log('错误'+respone)
             )
         }
+    },
+    watch: {
+        '$route': 'fetchData'
     },
     directives: {
         compiledMarkdown: {

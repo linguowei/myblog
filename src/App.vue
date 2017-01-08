@@ -123,6 +123,7 @@ pre {
     padding: 0.5rem 1rem;
     border-radius: 3px;
     margin: 10px 0 10px 0;
+    overflow-x: auto;
 }
 blockquote {
     border-left: 10px #e4e9eb solid;
