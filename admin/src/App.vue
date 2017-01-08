@@ -62,6 +62,21 @@ export default {
 body {
     position: relative;
 }
+pre {
+    background-color: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    margin: 10px 0 10px 0;
+}
+blockquote {
+    border-left: 10px #e4e9eb solid;
+    background-color: #f5f5f5;
+    padding: 15px 20px;
+    margin: 10px 0 10px 0;
+}
+strong {
+    color: #579eff;
+}
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -75,7 +90,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 9;
     border-right: 1px solid #f1f1f1;
     background-color: #f8f8f8;
 }

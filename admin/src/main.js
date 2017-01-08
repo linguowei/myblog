@@ -7,6 +7,7 @@ import articleList from './component/ArticleList.vue'
 import articleEdit from './component/ArticleEdit.vue'
 import atricleLabel from './component/ArticleLabel.vue'
 import personalCenter from './component/PersonalCenter.vue'
+import articlePreview from './component/ArticlePreview.vue'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -17,7 +18,8 @@ const router = new VueRouter({
 	routes: [
 		{path: '/articleList', component: articleList,
 		    children: [
-                {path: 'articleEdit', component: articleEdit}
+                {path: 'articleEdit', component: articleEdit},
+                {path: 'articlePreview:id', component: articlePreview},
             ]
 		},
 		{path: '/atricleLabel', component: atricleLabel},

@@ -11,13 +11,19 @@ app.use('/dist', express.static(resolve('../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// 保存操作
-// new db.Article(articleList).save(function(error){
-// 	console.log(error ? 'error' : 'success')
-// })
 
-// 查询文章列表路由
+// 查询文章列表路由 用于博客前端展示数据不包含草稿内容
 app.get('/api/articleList', function(req, res){
+	db.Article.find({state: "publish"}, function(err, docs){
+		if (err) {
+			console.log('出错'+ err);
+			return
+		}
+		res.json(docs)
+	})
+});
+// 查询文章列表路由 用于博客后端管理系统包含草稿和已发布文章数据
+app.get('/api/admin/articleList', function(req, res){
 	db.Article.find({}, function(err, docs){
 		if (err) {
 			console.log('出错'+ err);
@@ -35,7 +41,6 @@ app.get('/api/articleDetails/:id', function(req, res){
 		res.send(docs)
 	})
 });
-
 // 文章保存路由
 app.post('/api/saveArticle', function(req, res){
 	new db.Article(req.body.articleInformation).save(function(error){

@@ -130,6 +130,9 @@ blockquote {
     padding: 15px 20px;
     margin: 10px 0 10px 0;
 }
+strong {
+    color: #579eff;
+}
 * {
     margin: 0;
     padding: 0;
@@ -143,9 +146,6 @@ a:visited, a:link, a:active {
 }
 body {
     background-color: #f5f5f5;
-}
-strong {
-    color: #579eff;
 }
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

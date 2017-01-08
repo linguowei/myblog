@@ -8,8 +8,7 @@
             </div>
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
-                    <h3 class="articlePreview-title">{{item.title}}</h3>
-                    <!--<p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>-->
+                    <h3 class="articlePreview-title" @click="articlePreview(item._id)">{{item.title}}</h3>
                 </li>
             </ul>
         </div>
@@ -61,7 +60,7 @@ export default{
         if (this.$route.query.lebelTitle) {
             console.log(this.$route.query.lebelTitle)
         } else {
-            this.$http.get('/api/articleList').then(
+            this.$http.get('api/admin/articleList').then(
                 respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )
@@ -73,9 +72,13 @@ export default{
         addArticle: function(){
             this.$router.push('/articleList/articleEdit')
         },
+        // 文章预览页
+        articlePreview: function(id){
+            this.$router.push('/articleList/articlePreview'+id+'')
+        },
         // 接受ArtcleEdit组件派发的事件去获取最新的文章列表
         refreshArticleList: function(){
-            this.$http.get('/api/articleList').then(
+            this.$http.get('api/admin/articleList').then(
                 respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )

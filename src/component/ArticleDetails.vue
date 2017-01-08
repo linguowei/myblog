@@ -6,7 +6,7 @@
         <div class="content-panel-content">
             <div v-for="item in list">
                 <div class="atticle-title">{{item.title}}</div>
-                <div v-compiledMarkdown>{{item.articleContent}}</div>
+                <div style="color:#34495e" v-compiledMarkdown>{{item.articleContent}}</div>
             </div>
         </div>
 	</div>
@@ -19,8 +19,6 @@ import '../assets/atom-one-light.css'
 export default {
 	data () {
 		return {
-			title: '',
-			articleContent: '',
 			list: []
 		}
 	},
@@ -33,7 +31,6 @@ export default {
 			},
 			respone => console.log('错误'+respone)
 		)
-		console.log(this.$route.path)
 	},
 	methods: {
 		goBack: function(){

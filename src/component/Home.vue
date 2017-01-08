@@ -7,7 +7,7 @@
             <ul>
                 <li class="article-wrap" v-for="item in articleList">
                     <div class="atticle-title atticle-title-hover" @click="articleDetails(item._id)">{{item.title}}</div>
-                    <p v-compiledMarkdown>{{item.articleContent}}</p>
+                    <p style="color:#34495e;" v-compiledMarkdown>{{item.articleContent}}</p>
                     <div class="article-date">{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</div>
                     <div class="article-underline"></div>
                 </li>
@@ -24,7 +24,6 @@ export default {
     data () {
     	return {
     		articleList: [],
-    		dataId: 'test1'
     	}
     },
     methods: {
@@ -122,7 +121,6 @@ export default {
 	word-wrap: break-word;
     word-break: break-all
 }
-
 .article-date {
 	color: #a5a5a5;
 	font-size: 14px;
