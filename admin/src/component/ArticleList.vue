@@ -8,7 +8,7 @@
             </div>
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
-                    <h3 class="articlePreview-title" @click="articlePreview(item._id)">{{item.title}}</h3>
+                    <h3 :class="{'articlePreview-title-draft': item.state=='draft', 'articlePreview-title-publish': item.state=='publish'}" @click="articlePreview(item._id)">{{item.title}}</h3>
                     <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>
                 </li>
             </ul>
@@ -51,10 +51,20 @@ export default{
             return format;
         }
     },
-    created () {
+    created: function(){
         // 组件创建完后获取数据，
         // 此时 data 已经被 observed 了
-        this.fetchData()
+        if(this.$route.query){
+            this.$http.post('api/admin/articleList', {
+                label: this.$route.query
+            }).then(
+                respone => this.articleList = respone.body.reverse(),
+                respone => console.log(respone)
+            )
+            console.log(this.$route.query)
+        } else {
+            this.fetchData()
+        }
     },
     methods: {
         fetchData: function(){
@@ -149,7 +159,11 @@ export default{
     height: 100%;
     margin-left: 321px;
 }
-.articlePreview-title {
+.articlePreview-title-publish {
     color: #20a0ff;
 }
+.articlePreview-title-draft {
+    color: #FF4949;
+}
+
 </style>

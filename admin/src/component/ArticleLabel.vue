@@ -7,7 +7,7 @@
                 <img src="../assets/add.png" height="17" width="17" @click="addArticLabel">
             </div>
             <ul v-articleListHeight>
-                <li v-for="item in articleLabel" @click="labelClassification(item.titel)">
+                <li v-for="item in articleLabel" @click="labelClassification(item.tagName)">
                     <img src="../assets/labels.png" height="17" width="17">
                     <h3 class="articleLabel-title">{{item.tagName}} <span style="color:#7e7e7e;">({{item.tagNumber}})</span></h3>
                 </li>
