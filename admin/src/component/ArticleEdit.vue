@@ -139,11 +139,9 @@ export default {
                         Message.success('文章保存成功')
                         // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
                         self.$emit('saveArticleInformation')
-                        console.log(respone)
                     },
                     respone => {
                         Message.error('文章保存失败')
-                        console.log(respone)
                     }
                 )
     	    } else {
@@ -179,28 +177,58 @@ export default {
         // 发布文章
         publishedArticles: function(){
         	var self = this
-        	if(this.list.length>0){
-                var labelName = this.list[0].tagName
-            } else {
-                var labelName = '未分类'
+        	if(this.$route.query.id){
+    	        // 更新
+    	        if(this.list.length>0){
+                    var labelName = this.list[0].tagName;
+                } else {
+                    var labelName = '未分类'
+                }
+    	        var obj = {
+    	            _id: this.$route.query.id,
+                    title: self.articleTitle,
+                    articleContent: self.content,
+                    date: new Date().format('yyyy-MM-dd hh:mm:ss'),
+                    state: 'publish',
+                    label: labelName
+                }
+                this.$http.post('/api/updateArticle',{
+                    obj: obj
+                }).then(
+                    respone => {
+                        Message.success('文章发布成功')
+                        // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
+                        self.$emit('saveArticleInformation')
+                    },
+                    respone => {
+                        Message.error('文章发布成功')
+                    }
+                )
+    	    } else {
+    	        // 新建发布
+                if(this.list.length>0){
+                    var labelName = this.list[0].tagName
+                } else {
+                    var labelName = '未分类'
+                }
+                var obj = {
+                    title: self.articleTitle,
+                    articleContent: self.content,
+                    date: new Date().format('yyyy-MM-dd hh:mm:ss'),
+                    state: 'publish',
+                    label: labelName
+                }
+                this.$http.post('/api/saveArticle', {
+                    articleInformation: obj
+                }).then(
+                    respone => {
+                        Message.success('文章发布成功')
+                        // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
+                        self.$emit('saveArticleInformation')
+                    },
+                    respone => Message.error('文章发布失败')
+                )
             }
-            var obj = {
-                title: self.articleTitle,
-                articleContent: self.content,
-                date: new Date().format('yyyy-MM-dd hh:mm:ss'),
-                state: 'publish',
-                label: labelName
-            }
-            this.$http.post('/api/saveArticle', {
-            	articleInformation: obj
-            }).then(
-            	respone => {
-            		Message.success('文章发布成功')
-            		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
-            		self.$emit('saveArticleInformation')
-            	},
-            	respone => Message.error('文章发布失败')
-            )
         },
         selectTag: function(data){
             this.list.push(data)

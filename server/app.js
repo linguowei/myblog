@@ -91,13 +91,17 @@ app.post('/api/updateArticle', function(req, res){
         if(err){
             return
         }
-        docs[0] = res.body
+        docs[0].title = req.body.obj.title
+        docs[0].articleContent = req.body.obj.articleContent
+        docs[0].date = req.body.obj.date
+        docs[0].state = req.body.obj.state
+        docs[0].label = req.body.obj.label
         db.Article(docs[0]).save(function(err){
             if (err){
-                res.state(500)
+                res.status(500)
                 return
             }
-            res.state(200)
+            res.send()
         })
     })
 });
