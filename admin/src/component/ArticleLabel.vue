@@ -9,24 +9,39 @@
             <ul v-articleListHeight>
                 <li v-for="item in articleLabel" @click="labelClassification(item.titel)">
                     <img src="../assets/labels.png" height="17" width="17">
-                    <h3 class="articleLabel-title">{{item.titel}} <span style="color:#7e7e7e;">({{item.number}})</span></h3>
-                    <el-input v-if="isTagInputShow" v-model="tagData" placeholder="请输入标签名添加" @keyup.enter="saveTagNema"></el-input>
+                    <h3 class="articleLabel-title">{{item.tagName}} <span style="color:#7e7e7e;">({{item.tagNumber}})</span></h3>
                 </li>
             </ul>
+            <el-input class="tagName-input" v-if="isTagInputShow" v-model="tagName" placeholder="请输入标签名添加">
+                <el-button slot="append" icon="check" @click="saveTagNema"></el-button>
+            </el-input>
         </div>
     </div>
 </template>
 
 <script>
+import { Message } from 'element-ui';
 export default{
     data(){
         return{
             articleLabel: [
 
             ],
-            tagData: '',
+            tagName: '',
             isTagInputShow: false
         }
+    },
+    mounted: function(){
+        // 请求标签数据列表
+        this.$http.get('/api/getArticleLabel').then(
+            respone => {
+                this.articleLabel =  respone.body
+            },
+            respone => {
+                Message.error('请求数据出错，请重新刷新页面')
+            }
+
+        )
     },
     methods: {
         labelClassification: function(title){
@@ -34,12 +49,30 @@ export default{
         },
         addArticLabel: function(){
             this.isTagInputShow = true;
+        },
+        saveTagNema: function(){
+            this.isTagInputShow = false;
+            var obj = {
+                tagName: this.tagName,
+                tagNumber: 0
+            }
+            if(this.tagName){
+                this.articleLabel.push(obj)
+                this.$http.post('/api/saveArticleLabel',{
+                    tagList: obj
+                }).then(
+                    respone => {
+            		    Message.success('标签保存成功')
+                    },
+                    respone => Message.error('标签保存失败')
+                )
+            }
         }
     },
     directives: {
         articleListHeight: {
             bind: function(el){
-                var height = window.innerHeight - 80
+                var height = window.innerHeight - 120
                 el.style.maxHeight = height + 'px'
             }
         }
@@ -90,5 +123,10 @@ export default{
     text-overflow: ellipsis;
     cursor: pointer;
     color: #20a0ff;
+}
+.tagName-input {
+    margin: 5px 5px 0px;
+    position: absolute;
+    bottom: 13px
 }
 </style>

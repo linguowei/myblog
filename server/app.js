@@ -51,6 +51,38 @@ app.post('/api/saveArticle', function(req, res){
 		res.send()
 	})
 });
+// 文章标签查询路由
+app.get('/api/getArticleLabel', function(req, res){
+    db.Article.find({},function(err, articleList){
+        if (err) {
+            return
+        }
+        articleList.forEach(function(articleItem){
+            db.TagList.find({},function(err, labelList){
+                if (err) {
+                    return
+                }
+                labelList.forEach(function (item) {
+                    if (articleItem.label == item.tagName) {
+                        item.tagNumber++
+                        res.json(labelList)
+                    }
+                })
+            })
+
+        })
+    })
+});
+// 文章标签保存路由
+app.post('/api/saveArticleLabel', function(req, res){
+    new db.TagList(req.body.tagList).save(function(error){
+        if (error) {
+            res.send('保存失败');
+            return
+        }
+        res.send()
+    })
+});
 
 // 后台管理页路
 app.get('/admin', function(req, res) {

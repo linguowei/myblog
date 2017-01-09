@@ -7,12 +7,12 @@
             <div class="label">
                 <el-popover ref="tag" placement="top-start" width="150" trigger="click">
                     <ul class="tag-list-wrap">
-                        <li v-for="item in list" @click="selectTag(item)">{{item}}</li>
+                        <li v-for="item in tags" @click="selectTag(item)">{{item.tagName}}</li>
                     </ul>
                 </el-popover>
                 <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
-                <el-tag style="margin: 0 3px 0 3px;" v-for="tag in tags" :closable="true" :type="primary" :key="tag" :close-transition="false" @close="handleClose(tag)">
-                    {{tag}}
+                <el-tag style="margin: 0 3px 0 3px;" v-for="item in list" :closable="true" :type="primary" :key="tag" :close-transition="false" @close="handleClose(tag)">
+                    {{item.tagName}}
                 </el-tag>
             </div>
             <div class="action-button">
@@ -37,7 +37,7 @@ export default {
             articleTitle: '请输入文章标题',
             content: '',
             tags: [],
-            list: ['node', 'Angular', '前端','node', 'Angular', '前端','node', 'Angular', '前端']
+            list: []
         }
     },
     mounted: function(){
@@ -84,21 +84,35 @@ export default {
         });
         smde.codemirror.on("change", function(){
             var value = smde.value();
-            console.log(value)
             self.content = value
-        })
+        });
         smde.value("快来开始写博客吧");
+        // 请求标签数据列表
+        this.$http.get('/api/getArticleLabel').then(
+            respone => {
+                this.tags =  respone.body
+            },
+            respone => {
+                Message.error('数据出错，请重新刷新页面')
+            }
+
+        )
     },
     methods: {
     	// 保存草稿
     	saveDraft: function(){
             var self = this
+            if(this.list.length>0){
+                var labelName = this.list[0].tagName;
+            } else {
+                var labelName = '未分类'
+            }
             var obj = {
                 title: self.articleTitle,
                 articleContent: self.content,
                 date: new Date().format('yyyy-MM-dd hh:mm:ss'),
                 state: 'draft',
-                label: this.tags,
+                label: labelName
             }
             this.$http.post('/api/saveArticle', {
             	articleInformation: obj
@@ -118,12 +132,17 @@ export default {
         // 发布文章
         publishedArticles: function(){
         	var self = this
+        	if(this.list.length>0){
+                var labelName = this.list[0].tagName
+            } else {
+                var labelName = '未分类'
+            }
             var obj = {
                 title: self.articleTitle,
                 articleContent: self.content,
                 date: new Date().format('yyyy-MM-dd hh:mm:ss'),
                 state: 'publish',
-                label: '技术分享',
+                label: labelName
             }
             this.$http.post('/api/saveArticle', {
             	articleInformation: obj
@@ -137,10 +156,11 @@ export default {
             )
         },
         selectTag: function(data){
-            this.tags.push(data)
+            this.list.push(data)
+            console.log(this.list,data)
         },
         handleClose: function(tag) {
-            this.tags.splice(this.tags.indexOf(tag), 1);
+            this.list.splice(this.tags.indexOf(tag), 1);
         }
     },
     directives: {
