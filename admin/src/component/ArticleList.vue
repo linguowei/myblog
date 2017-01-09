@@ -54,14 +54,13 @@ export default{
     created: function(){
         // 组件创建完后获取数据，
         // 此时 data 已经被 observed 了
-        if(this.$route.query){
+        if(this.$route.query.labelTitle){
             this.$http.post('api/admin/articleList', {
                 label: this.$route.query
             }).then(
                 respone => this.articleList = respone.body.reverse(),
                 respone => console.log(respone)
             )
-            console.log(this.$route.query)
         } else {
             this.fetchData()
         }

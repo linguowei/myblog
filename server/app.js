@@ -53,6 +53,15 @@ app.get('/api/articleDetails/:id', function(req, res){
 		res.send(docs)
 	})
 });
+app.post('/api/articleDetails', function(req, res){
+    db.Article.findOne({_id: req.body.id}, function(err, docs){
+        if (err) {
+            return
+        }
+        res.send(docs)
+    })
+});
+
 // 文章保存路由
 app.post('/api/saveArticle', function(req, res){
 	new db.Article(req.body.articleInformation).save(function(error){
@@ -75,6 +84,25 @@ app.post('/api/saveArticle', function(req, res){
 		res.send()
 	})
 });
+
+// 文章更新路由
+app.post('/api/updateArticle', function(req, res){
+    db.Article.find({_id: req.body.obj._id}, function(err, docs){
+        if(err){
+            return
+        }
+        docs[0] = res.body
+        db.Article(docs[0]).save(function(err){
+            if (err){
+                res.state(500)
+                return
+            }
+            res.state(200)
+        })
+    })
+});
+
+
 // 文章标签查询路由
 app.get('/api/getArticleLabel', function(req, res){
     db.TagList.find({},function(err, docs){

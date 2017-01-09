@@ -86,7 +86,22 @@ export default {
             var value = smde.value();
             self.content = value
         });
-        smde.value("快来开始写博客吧");
+
+
+        if(this.$route.query.id){
+            this.$http.post('/api/articleDetails', {
+                id: this.$route.query.id
+            }).then(
+                respone => {
+                    this.articleTitle = respone.body.title,
+                    smde.value(respone.body.articleContent)
+                },
+                respone => console.log(respone)
+            )
+        } else {
+            smde.value("快来开始写博客吧");
+        }
+
         // 请求标签数据列表
         this.$http.get('/api/getArticleLabel').then(
             respone => {
@@ -101,33 +116,65 @@ export default {
     methods: {
     	// 保存草稿
     	saveDraft: function(){
-            var self = this
-            if(this.list.length>0){
-                var labelName = this.list[0].tagName;
-            } else {
-                var labelName = '未分类'
-            }
-            var obj = {
-                title: self.articleTitle,
-                articleContent: self.content,
-                date: new Date().format('yyyy-MM-dd hh:mm:ss'),
-                state: 'draft',
-                label: labelName
-            }
-            this.$http.post('/api/saveArticle', {
-            	articleInformation: obj
-            }).then(
-            	respone => {
-            		Message.success('文章保存成功')
-            		// 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
-            		self.$emit('saveArticleInformation')
-            		console.log(respone)
-            	},
-            	respone => {
-            		Message.error('文章保存失败')
-            		console.log(respone)
-            	}
-            )
+    	    var self = this
+    	    if(this.$route.query.id){
+    	        // 更新
+    	        if(this.list.length>0){
+                    var labelName = this.list[0].tagName;
+                } else {
+                    var labelName = '未分类'
+                }
+    	        var obj = {
+    	            _id: this.$route.query.id,
+                    title: self.articleTitle,
+                    articleContent: self.content,
+                    date: new Date().format('yyyy-MM-dd hh:mm:ss'),
+                    state: 'draft',
+                    label: labelName
+                }
+                this.$http.post('/api/updateArticle',{
+                    obj: obj
+                }).then(
+                    respone => {
+                        Message.success('文章保存成功')
+                        // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
+                        self.$emit('saveArticleInformation')
+                        console.log(respone)
+                    },
+                    respone => {
+                        Message.error('文章保存失败')
+                        console.log(respone)
+                    }
+                )
+    	    } else {
+    	        // 新建保存
+    	        if(this.list.length>0){
+                    var labelName = this.list[0].tagName;
+                } else {
+                    var labelName = '未分类'
+                }
+                var obj = {
+                    title: self.articleTitle,
+                    articleContent: self.content,
+                    date: new Date().format('yyyy-MM-dd hh:mm:ss'),
+                    state: 'draft',
+                    label: labelName
+                }
+                this.$http.post('/api/saveArticle', {
+                    articleInformation: obj
+                }).then(
+                    respone => {
+                        Message.success('文章保存成功')
+                        // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
+                        self.$emit('saveArticleInformation')
+                        console.log(respone)
+                    },
+                    respone => {
+                        Message.error('文章保存失败')
+                        console.log(respone)
+                    }
+                )
+    	    }
         },
         // 发布文章
         publishedArticles: function(){

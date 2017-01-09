@@ -3,6 +3,9 @@
         <div v-for="item in list">
             <div class="atticle-title">{{item.title}}</div>
             <div style="color:#34495e" v-compiledMarkdown>{{item.articleContent}}</div>
+            <div class="article-preview-footer">
+                <el-button type="primary" icon="edit" @click="modify(item._id)">不满意，点此修改</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -47,6 +50,9 @@ export default{
                 },
                 respone => console.log('错误'+respone)
             )
+        },
+        modify: function(id){
+            this.$router.push({path: '/articleList/articleEdit', query: {id: id}})
         }
     },
     watch: {
@@ -63,6 +69,11 @@ export default{
 </script>
 
 <style>
+.article-preview-footer {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+}
 .artivcle-preview {
     padding: 15px;
 }
