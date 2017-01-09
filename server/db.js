@@ -16,9 +16,14 @@ var articleSchema = new mongoose.Schema({
 	label: String,
 })
 
+var tagSchema = new mongoose.schema({
+    tagLisg: Array,
+})
+
 var Models = {
 	User: mongoose.model('User', userSchema),
-	Article: mongoose.model('Article', articleSchema)
+	Article: mongoose.model('Article', articleSchema),
+	tagList: mongoose.model('tagList', tagSchema),
 }
 
 module.exports = Models

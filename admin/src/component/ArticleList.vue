@@ -9,6 +9,7 @@
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
                     <h3 class="articlePreview-title" @click="articlePreview(item._id)">{{item.title}}</h3>
+                    <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>
                 </li>
             </ul>
         </div>
@@ -25,14 +26,7 @@
 export default{
     data(){
         return{
-            articleList: [
-                {
-                    title : "文章标题1",
-                    date : "2016-12-23T06:20:06.000Z",
-                    state : "publish",
-                    label : "技术分享",
-                }
-            ]
+            articleList: []
         }
     },
     mounted: function(){
@@ -133,6 +127,7 @@ export default{
 }
 .article-list > ul > li > p {
     font-size: 12px;
+    color: #b3bbbc;
 }
 .article-instructions {
     height: 65px;

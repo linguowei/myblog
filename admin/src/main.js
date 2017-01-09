@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
-import {Button} from 'element-ui'
+import {Button, Popover, Tag, Input} from 'element-ui'
 import articleList from './component/ArticleList.vue'
 import articleEdit from './component/ArticleEdit.vue'
 import atricleLabel from './component/ArticleLabel.vue'
@@ -12,6 +12,9 @@ import articlePreview from './component/ArticlePreview.vue'
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(Button)
+Vue.use(Popover)
+Vue.use(Tag)
+Vue.use(Input)
 
 const router = new VueRouter({
 	routes: [

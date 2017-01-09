@@ -5,7 +5,15 @@
         </div>
         <div class="article-toolbar">
             <div class="label">
-
+                <el-popover ref="tag" placement="top-start" width="150" trigger="click">
+                    <ul class="tag-list-wrap">
+                        <li v-for="item in list" @click="selectTag(item)">{{item}}</li>
+                    </ul>
+                </el-popover>
+                <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
+                <el-tag style="margin: 0 3px 0 3px;" v-for="tag in tags" :closable="true" :type="primary" :key="tag" :close-transition="false" @close="handleClose(tag)">
+                    {{tag}}
+                </el-tag>
             </div>
             <div class="action-button">
                 <el-button size="small" @click="saveDraft">保存草稿</el-button>
@@ -28,6 +36,8 @@ export default {
         return {
             articleTitle: '请输入文章标题',
             content: '',
+            tags: [],
+            list: ['node', 'Angular', '前端','node', 'Angular', '前端','node', 'Angular', '前端']
         }
     },
     mounted: function(){
@@ -77,6 +87,7 @@ export default {
             console.log(value)
             self.content = value
         })
+        smde.value("快来开始写博客吧");
     },
     methods: {
     	// 保存草稿
@@ -87,7 +98,7 @@ export default {
                 articleContent: self.content,
                 date: new Date().format('yyyy-MM-dd hh:mm:ss'),
                 state: 'draft',
-                label: '技术分享',
+                label: this.tags,
             }
             this.$http.post('/api/saveArticle', {
             	articleInformation: obj
@@ -124,6 +135,12 @@ export default {
             	},
             	respone => Message.error('文章发布失败')
             )
+        },
+        selectTag: function(data){
+            this.tags.push(data)
+        },
+        handleClose: function(tag) {
+            this.tags.splice(this.tags.indexOf(tag), 1);
         }
     },
     directives: {
@@ -161,8 +178,35 @@ export default {
 }
 .label {
     width: 50%;
+    height: 60px;
+    line-height: 60px;
     padding-left: 10px;
     float: left;
+    display: table-cell;
+    vertical-align: middle;
+}
+.label > img {
+    vertical-align: middle;
+    cursor: pointer;
+}
+.label > img:hover {
+    border-bottom: 2px solid #20a0ff;
+}
+.tag-list-wrap {
+    border: 1px solid #e0e6ed;
+    padding: 5px;
+    max-height: 150px;
+    overflow: auto;
+}
+.tag-list-wrap > li {
+    margin: 2px;
+    padding: 3px;
+    cursor: pointer;
+    height: 30px;
+    line-height: 36px;
+}
+.tag-list-wrap > li:hover {
+    background-color: #e0e6ed;
 }
 .action-button {
     min-width: 120px;

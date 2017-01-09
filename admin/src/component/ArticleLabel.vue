@@ -10,6 +10,7 @@
                 <li v-for="item in articleLabel" @click="labelClassification(item.titel)">
                     <img src="../assets/labels.png" height="17" width="17">
                     <h3 class="articleLabel-title">{{item.titel}} <span style="color:#7e7e7e;">({{item.number}})</span></h3>
+                    <el-input v-if="isTagInputShow" v-model="tagData" placeholder="请输入标签名添加" @keyup.enter="saveTagNema"></el-input>
                 </li>
             </ul>
         </div>
@@ -21,12 +22,10 @@ export default{
     data(){
         return{
             articleLabel: [
-                {titel: 'node', number: '8'},
-                {titel: '前端',number: '3'},
-                {titel: 'http',number: '1'},
-                {titel: 'vue',number: '6'},
-                {titel: 'Angular',number: '9'},
-            ]
+
+            ],
+            tagData: '',
+            isTagInputShow: false
         }
     },
     methods: {
@@ -34,7 +33,7 @@ export default{
             this.$router.push({path: 'articleList', query: {lebelTitle: title}})
         },
         addArticLabel: function(){
-
+            this.isTagInputShow = true;
         }
     },
     directives: {

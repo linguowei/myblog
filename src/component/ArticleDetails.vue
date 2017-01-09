@@ -1,11 +1,11 @@
 <template>
 	<div>
         <div class="content-panel-header">
-            <h4 @click="goBack">返回</h4>
+            <h4 @click="goBack" style="cursor: pointer;">返回</h4>
         </div>
         <div class="content-panel-content">
             <div v-for="item in list">
-                <div class="atticle-title">{{item.title}}</div>
+                <div class="atticle-title atticle-details-title">{{item.title}}</div>
                 <div style="color:#34495e" v-compiledMarkdown>{{item.articleContent}}</div>
             </div>
         </div>
@@ -56,5 +56,8 @@ export default {
 	color: #2c3e50;
 	font-weight: bold;
 	margin-bottom: 10px;
+}
+.atticle-details-title {
+    cursor: auto;
 }
 </style>

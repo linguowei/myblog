@@ -41,8 +41,7 @@ export default{
         fetchData: function(){
             var id = this.$route.params.id
             this.list = []
-            this.$http.get('/api/articleDetails/'+ id)
-            .then(
+            this.$http.get('/api/articleDetails/'+ id).then(
                 respone => {
                     this.list.push(respone.body)
                 },
