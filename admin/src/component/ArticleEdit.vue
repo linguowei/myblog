@@ -11,7 +11,7 @@
                     </ul>
                 </el-popover>
                 <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
-                <el-tag style="margin: 0 3px 0 3px;" v-for="item in list" :closable="true" :type="primary" :key="tag" :close-transition="false" @close="handleClose(tag)">
+                <el-tag style="margin: 0 3px 0 3px;" v-for="item in list" :closable="true" type="success" :key="tag" :close-transition="false" @close="handleClose(tag)">
                     {{item.tagName}}
                 </el-tag>
             </div>
@@ -94,6 +94,9 @@ export default {
             }).then(
                 respone => {
                     this.articleTitle = respone.body.title,
+                    this.list.push({
+                        tagName: respone.body.label
+                    }),
                     smde.value(respone.body.articleContent)
                 },
                 respone => console.log(respone)
@@ -165,11 +168,9 @@ export default {
                         Message.success('文章保存成功')
                         // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表
                         self.$emit('saveArticleInformation')
-                        console.log(respone)
                     },
                     respone => {
                         Message.error('文章保存失败')
-                        console.log(respone)
                     }
                 )
     	    }
@@ -231,8 +232,8 @@ export default {
             }
         },
         selectTag: function(data){
+            this.list = []
             this.list.push(data)
-            console.log(this.list,data)
         },
         handleClose: function(tag) {
             this.list.splice(this.tags.indexOf(tag), 1);

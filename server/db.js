@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/weiweiblog')
 
 var userSchema = new mongoose.Schema({
 	name: String,
-	pwd: String
+	pwd: String,
 })
 
 var articleSchema = new mongoose.Schema({
@@ -21,10 +21,17 @@ var tagSchema = new mongoose.Schema({
     tagNumber: Number,
 })
 
+var personalInformationSchema = new mongoose.Schema({
+    name: String,
+    individualitySignature: String,
+    introduce: String,
+})
+
 var Models = {
 	User: mongoose.model('User', userSchema),
 	Article: mongoose.model('Article', articleSchema),
 	TagList: mongoose.model('TagList', tagSchema),
+    PersonalInformation: mongoose.model('PersonalInformation', personalInformationSchema),
 }
 
 module.exports = Models

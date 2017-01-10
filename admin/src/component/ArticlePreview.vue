@@ -1,12 +1,14 @@
 <template>
     <div class="artivcle-preview">
-        <div v-for="item in list">
-            <div class="atticle-title">{{item.title}}</div>
-            <div style="color:#34495e" v-compiledMarkdown>{{item.articleContent}}</div>
-            <div class="article-preview-footer">
-                <el-button type="primary" icon="edit" @click="modify(item._id)">不满意，点此修改</el-button>
+        <transition name="fade" mode="out-in">
+            <div v-for="item in list" v-if="list.length>0">
+                <div class="atticle-title">{{item.title}}</div>
+                <div style="color:#34495e" v-compiledMarkdown>{{item.articleContent}}</div>
+                <div class="article-preview-footer">
+                    <el-button type="primary" icon="edit" @click="modify(item._id)">不满意，点此修改</el-button>
+                </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -17,7 +19,7 @@ import '../assets/atom-one-light.css'
 export default{
     data(){
         return{
-           list: [],
+            list: [],
         }
     },
     created () {
