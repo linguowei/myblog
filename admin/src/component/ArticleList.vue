@@ -8,14 +8,15 @@
             </div>
             <ul v-articleListHeight>
                 <li v-for="item in articleList">
-                    <h3 :class="{'articlePreview-title-draft': item.state=='draft', 'articlePreview-title-publish': item.state=='publish'}" @click="articlePreview(item._id)">{{item.title}}</h3>
+                    <h3 :class="{'articlePreview-title-draft': item.state=='draft', 'articlePreview-title-publish': item.state=='publish'}" @click="articlePreview(item._id)">
+                        {{item.title}}
+                    </h3>
                     <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>
                 </li>
             </ul>
         </div>
         <div class="router-view">
             <transition name="fade" mode="out-in">
-                <h1 v-if="this.$route.path == '/admin'">赶紧来写文章啦，不写就来不及了</h1>
                 <router-view @saveArticleInformation="refreshArticleList" @emitArticleLabelList="onArticleLabelLis"></router-view>
             </transition>
         </div>

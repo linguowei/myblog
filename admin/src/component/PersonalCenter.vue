@@ -7,7 +7,7 @@
                     <el-input v-model="form.name"></el-input>
                 </el-form-item>
                 <el-form-item label="博客说明">
-                    <el-input v-model="form.instructions"></el-input>
+                    <el-input v-model="form.individualitySignature"></el-input>
                 </el-form-item>
                 <el-form-item label="个人介绍">
                     <el-input type="textarea" class="textarea-height" v-model="form.introduce"></el-input>
@@ -26,13 +26,16 @@ export default{
         return{
             form: {
                 name: '',
-                instructions: '',
+                individualitySignature: '',
                 introduce: '',
             }
         }
     },
     mounted: function(){
-        
+        this.$http.get('/api/personalInformation').then(
+            respone => this.form = respone.body[0],
+            respone => this.$message.error('服务器出错，请重新刷新页面')
+        )
     },
     methods: {
         onSubmit: function(){
@@ -40,7 +43,7 @@ export default{
                 form: this.form
             }).then(
                 respone => this.$message('保存成功'),
-                respone => this.$message.error('保存失败，请刷新页面重试重试')
+                respone => this.$message.error('保存失败，请刷新页面重试')
             )
         }
     }

@@ -16,6 +16,7 @@
                 </el-tag>
             </div>
             <div class="action-button">
+                <el-button v-if="this.$route.query.id" type="danger" size="small" @click="delectArticles">删除</el-button>
                 <el-button size="small" @click="saveDraft">保存草稿</el-button>
                 <el-button type="primary" size="small" @click="publishedArticles">发布文章</el-button>
             </div>
@@ -117,6 +118,21 @@ export default {
         )
     },
     methods: {
+        // 删除
+        delectArticles: function(){
+            this.$http.post('/api/delect/article', {
+                _id : this.$route.query.id
+            }).then(
+                respone => {
+                    this.$message('删除成功'),
+                    this.$emit('saveArticleInformation'),
+                    this.$router.push('/articleList/articleEdit')
+                },
+                respone => {
+                    this.$message.error('删除失败请重试')
+                }
+            )
+        },
     	// 保存草稿
     	saveDraft: function(){
     	    var self = this

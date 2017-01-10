@@ -119,7 +119,7 @@ router.post('/api/save/personalInformation', function(req, res){
         }
         if(docs.length>0){
             docs[0].name = req.body.form.name
-            docs[0].individualitySignature = req.body.form.instructions
+            docs[0].individualitySignature = req.body.form.individualitySignature
             docs[0].introduce = req.body.form.introduce
             db.PersonalInformation(docs[0]).save(function(err){
                 if (err) {
@@ -138,7 +138,26 @@ router.post('/api/save/personalInformation', function(req, res){
             })
         }
     })
+})
+router.get('/api/personalInformation', function(req, res){
+    db.PersonalInformation.find({}, function(err, docs){
+        if (err) {
+            res.status(500).send();
+            return
+        }
+        res.json(docs)
+    })
+})
 
+// 删除文章
+router.post('/api/delect/article', function(req, res){
+    db.Article.remove({_id: req.body._id}, function(err, docs){
+        if (err) {
+            res.status(500).send();
+            return
+        }
+        res.send()
+    })
 })
 
 module.exports = router
