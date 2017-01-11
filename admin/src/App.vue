@@ -8,7 +8,7 @@
                 <img src="./assets/article.png" height="50" width="50">
             </div>
             <div class="label-logo" @click="articleLabel">
-                <img src="./assets/label.png" height="50" width="50">
+                <img src="./assets/adminlabel.png" height="50" width="50">
             </div>
             <div class="use-logo" @click="personalCenter">
                 <img src="./assets/use.png" height="50" width="50">

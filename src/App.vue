@@ -5,30 +5,30 @@
                 <img src="./assets/head-portrait.jpg" height="210" width="210" @click="headPortrait">
             </div>
             <div class="name">
-                <h3>weiwei</h3>
+                <h3>{{name}}</h3>
             </div>
             <div class="underline"></div>
             <div class="introduce">
-                <p>this is a blog</p>
+                <p>{{individualitySignature}}</p>
             </div>
             <div class="archive">
                 <div class="archive-left" @click="article">
                     <el-tooltip class="item" effect="dark" content="文章" placement="bottom">
-                        <p>46</p>
+                        <p>{{articleNumber}}</p>
                         <img src="./assets/file.png" height="20" width="20">
                     </el-tooltip>
                 </div>
                 <div class="divider"></div>
                 <div class="archive-center" @click="classification">
                     <el-tooltip class="item" effect="dark" content="分类" placement="bottom">
-                        <p>25</p>
+                        <p>0</p>
                         <img src="./assets/folder.png" height="20" width="20">
                     </el-tooltip>
                 </div>
                 <div class="divider"></div>
                 <div class="archive-right" @click="label">
                     <el-tooltip class="item" effect="dark" content="标签" placement="bottom">
-                        <p>31</p>
+                        <p>{{tagNumber}}</p>
                         <img src="./assets/bookmark.png" height="20" width="20">
                     </el-tooltip>
                 </div>
@@ -44,7 +44,7 @@
                             v-show="isShowSeach"
                             placeholder="请输入标题关键字"
                             icon="search"
-                            v-model="input2">
+                            v-model="seachTitle">
                         </el-input>
                         <span v-show="!isShowSeach">搜索</span>
                     </div>
@@ -65,17 +65,29 @@ export default {
     data () {
         return {
             isShowSeach: false,
-            input2: ''
+            seachTitle: '',
+            name: '',
+            individualitySignature: '',
+            tagNumber: '',
+            articleNumber: ''
         }
     },
     mounted: function(){
-        // this.$http.get('/img').then(
-        //     respone=> {
-        //         console.log(respone)
-        //         this.msg = respone.body.msg
-        //     },
-        //     respone=> console.log('错误')
-        // )
+         this.$http.get('/api/personalInformation').then(
+              respone => {
+                   this.name = respone.body[0].name,
+                   this.individualitySignature = respone.body[0].individualitySignature
+              },
+              respone => console.log(respone)
+         )
+         this.$http.get('/api/getArticleLabel').then(
+              respone => this.tagNumber = respone.body.length,
+              respone => console.log(respone)
+         )
+         this.$http.get('/api/articleList').then(
+    		  respone => this.articleNumber = respone.body.length,
+    		  respone => console.log(respone)
+    	 )
     },
     methods: {
         headPortrait: function(){

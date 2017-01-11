@@ -4,7 +4,9 @@
 			<h4>归档</h4>
 		</div>
 		<div class="content-panel-content">
-            <h1>this is archive</h1>
+            <div class="archive-panel">
+                <h1>这里暂时还没内容噢</h1>
+            </div>
 		</div>
 	</div>
 </template>
@@ -15,4 +17,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.archive-panel {
+    text-align: center;
+    padding-top: 8rem;
+    color: #ccc;
+}
+</style>

@@ -4,6 +4,9 @@
             <h4>最新文章</h4>
         </div>
         <div class="content-panel-content">
+            <div class="classify-panel" v-if="this.$route.query.tagId && articleList.length==0">
+                <h1>该标签下暂无文章，请返回查看其它标签内容</h1>
+            </div>
             <ul>
                 <li class="article-wrap" v-for="item in articleList">
                     <div class="atticle-title atticle-title-hover" @click="articleDetails(item._id)">{{item.title}}</div>
@@ -26,11 +29,6 @@ export default {
     		articleList: [],
     	}
     },
-    methods: {
-    	articleDetails: function(id){
-    		this.$router.push('/articleDetails'+id+'')
-    	}
-    },
     mounted: function(){
         Date.prototype.format = function(format) {
             var o = {
@@ -51,13 +49,8 @@ export default {
                 }
             }
             return format;
-        },
-    	this.$http.get('/api/articleList').then(
-    		respone => {
-    		    this.articleList = respone.body.reverse();
-    		},
-    		respone => console.log('erroe'+respone)
-    	),
+        }
+
     	marked.setOptions({
             renderer: new marked.Renderer(),
             gfm: true,
@@ -70,7 +63,31 @@ export default {
             highlight: function (code) {
                 return highlight.highlightAuto(code).value;
             }
-        });
+        })
+
+        if(this.$route.query.tagId){
+            this.$http.post('/api/articleList', {
+                tagId: this.$route.query.tagId
+            }).then(
+                respone => this.articleList = respone.body.reverse(),
+                respone => console.log(respone)
+            )
+        } else {
+            this.fetchData()
+        }
+    },
+    methods: {
+    	articleDetails: function(id){
+    		this.$router.push('/articleDetails'+id+'')
+    	},
+    	fetchData: function(){
+    	    this.$http.get('/api/articleList').then(
+                respone => {
+                    this.articleList = respone.body.reverse();
+                },
+                respone => console.log('erroe'+respone)
+            )
+    	}
     },
     directives: {
         compiledMarkdown: {
@@ -84,7 +101,10 @@ export default {
                 }
             }
         }
-    }
+    },
+    watch: {
+        '$route': 'fetchData'
+    },
 }
 </script>
 

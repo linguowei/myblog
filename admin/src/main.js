@@ -16,6 +16,7 @@ Vue.use(ElementUI)
 
 const router = new VueRouter({
 	routes: [
+        {path: '/', component: personalCenter },
 		{path: '/articleList', component: articleList,
 		    children: [
                 {path: 'articleEdit', component: articleEdit},
@@ -23,7 +24,7 @@ const router = new VueRouter({
             ]
 		},
 		{path: '/atricleLabel', component: atricleLabel},
-		{path: '/personalCenter', component: personalCenter},
+        {path: '/personalCenter', component: personalCenter},
 		// {path: '/about', component: about},
 		// {path: '/articleDetails:id', component: articleDetails},
 		// {path: '/classify', component: classify},
