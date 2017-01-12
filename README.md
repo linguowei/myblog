@@ -38,4 +38,4 @@
 # localhost:9000/admin
 ```
 ### License
-[MIT](http://baike.baidu.com/link?url=Jyi0g4j2lZkwKOFlh0E_5RmvG30PWa7KQrwP61ITgroqFLEJUb93PfXzCRC1ElZfZhfJFgPJCZQ4ZmtsiMC_oEvYL9Gev7yhNH_ErDmxmDRBIpWvJxzKdPQPn4xeYNHF)
+[MIT](https://www.oschina.net/question/54100_9455)
