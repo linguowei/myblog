@@ -157,12 +157,14 @@ router.post('/api/save/personalInformation', function(req, res){
         }
     })
 })
+
 router.get('/api/personalInformation', function(req, res){
     db.PersonalInformation.find({}, function(err, docs){
         if (err) {
             res.status(500).send();
             return
         }
+        console.log(docs)
         res.json(docs)
     })
 })
