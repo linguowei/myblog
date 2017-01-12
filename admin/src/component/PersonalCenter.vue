@@ -37,6 +37,7 @@ export default{
             respone => this.$message.error('服务器出错，请重新刷新页面')
         )
     },
+
     methods: {
         onSubmit: function(){
             this.$http.post('/api/save/personalInformation', {

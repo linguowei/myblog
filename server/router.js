@@ -164,7 +164,6 @@ router.get('/api/personalInformation', function(req, res){
             res.status(500).send();
             return
         }
-        console.log(docs)
         res.json(docs)
     })
 })

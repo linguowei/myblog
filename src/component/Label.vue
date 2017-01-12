@@ -9,7 +9,6 @@
                     <img src="../assets/label.png" height="25" width="25">
 					<h3 class="articleLabel-title">
                         {{item.tagName}}
-                        <span style="color:#7e7e7e;">({{item.tagNumber}})</span>
                     </h3>
 				</li>
 			</ul>
