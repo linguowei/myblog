@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
 var mime = require('mime');
-var router = require('../server/router');
+var router = require('./server/router');
 var app = express();
 
 var resolve = file => path.resolve(__dirname, file);
