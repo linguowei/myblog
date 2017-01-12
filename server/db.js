@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
-mongoose.connect('mongodb://localhost/weiweiblog')
+mongoose.connect('mongodb://linguowei:sg5678477926@ds161008.mlab.com:61008/weiwei')
 
 var userSchema = new mongoose.Schema({
 	name: String,

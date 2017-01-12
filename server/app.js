@@ -26,6 +26,6 @@ app.get('*', function(req, res) {
     res.send(html)
 });
 
-app.listen(9000, function() {
+app.listen(process.env.PORT || 9000, function() {
     console.log("应用实例，访问地址为 localhost:9000")
 });
