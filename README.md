@@ -19,8 +19,6 @@
 # cd myblog
 # npm install
 # node app.js
-# localhost:8080
-# npm install
-# http://localhost:9000
-#http://localhost:9000/admin
+# localhost:9000
+# localhost:9000/admin
 ```
