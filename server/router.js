@@ -73,7 +73,6 @@ router.post('/api/saveArticle', function(req, res){
             return
         }
         if (req.body.articleInformation.state != 'draft') {
-            // 更新文章对应的标签数据
             db.Article.find({label:req.body.articleInformation.label},function(err, ArticleList){
                 if (err) {
                     return
@@ -89,6 +88,8 @@ router.post('/api/saveArticle', function(req, res){
         res.send()
     })
 });
+
+
 // 文章更新路由
 router.post('/api/updateArticle', function(req, res){
     db.Article.find({_id: req.body.obj._id}, function(err, docs){

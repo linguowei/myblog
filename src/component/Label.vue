@@ -52,6 +52,9 @@ export default {
     float: left;
     line-height: 55px;
     padding: 5px 10px 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 .label-list-wrap > li > img {
     display: block;
