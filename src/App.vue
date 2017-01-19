@@ -115,8 +115,8 @@ export default {
     directives: {
         contentHight: {
             bind: function(el){
-                var aa = window.innerHeight - 100
-                el.style.height = aa + 'px'
+                var contentHeight = window.innerHeight - 100
+                el.style.height = contentHeight + 'px'
             }
         }
     }
