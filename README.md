@@ -27,7 +27,7 @@
 ---
 ![](https://github.com/linguowei/myblog/blob/master/PreviewImg/admin4.png)
 ---
-### 本地查看方法(注：请把我代码里面数据库地址改成你自己本地的数据库地址)
+### 本地查看方法
 
 ``` bash
 # git clone https://github.com/linguowei/myblog.git
