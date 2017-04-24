@@ -1,7 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var users = require('./user').items;
 var db = require('./db');
 
+var findUser = function(name, password){
+    return users.find(function(item){
+        return item.name === name && item.password === password;
+    });
+};
+// 登录接口
+router.post('/api/login', function(req, res){
+    var sess = req.session;
+    var user = findUser(req.body.name, req.body.pwd);
+
+    if(user){
+        req.session.regenerate(function(err) {
+            if(err){
+                return res.json({code: 2, msg: '登录失败'});
+            }
+            req.session.loginUser = user.name;
+            res.json({code: 0, msg: '登录成功'});
+        });
+    }else{
+        res.json({code: 1, msg: '账号或密码错误'});
+    }
+})
 // 查询文章列表路由 用于博客前端展示数据不包含草稿内容
 router.get('/api/articleList', function(req, res){
     db.Article.find({state: "publish"}, function(err, docs){

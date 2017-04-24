@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+.login-wrap {
+    width: 100vw;
+    height: 100vh;
+    background-color: #324157;
+}
+.login-title {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -230px;
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+}
+.login-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 160px;
+    margin: -150px 0 0 -190px;
+    padding: 40px;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+}
+.login-name {
+    margin-bottom: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    display: block;
+    font-size: inherit;
+    height: 36px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+.login-pwd {
+    margin-bottom: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    display: block;
+    font-size: inherit;
+    height: 36px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+.login-submit {
+    width: 300px;
+    border-color: #4db3ff;
+    color: #fff;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #bfcbd9;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #20a0ff;
+}
+.case-number {
+    margin-top: 1rem;
+    font-size: 14px;
+    color: #5d5d5d;
+}
+</style>
+<body>
+<div id="login">
+    <div class="login-wrap">
+        <div class="login-title">博客管理后台</div>
+        <div class="login-panel">
+            <input type="text" class="login-name" placeholder="username" value="">
+            <input type="password" class="login-pwd" placeholder="password" value="">
+            <button type="submit" class="login-submit">Login</button>
+            <div class="case-number">tips 账号:admin 密码: 123456</div>
+        </div>
+    </div>
+</div>
+<script>
+window.onload = function(){
+    var name = document.querySelector('.login-name').value;
+    var pwd = document.querySelector('.login-pwd').value;
+    var login = document.querySelector('.login-submit');
+    login.addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", '/api/login', false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var obj = {
+            name: document.querySelector('.login-name').value,
+            pwd: document.querySelector('.login-pwd').value
+        }
+        xhr.send(JSON.stringify(obj))
+        if (xhr.status >= 200 && xhr.status < 300 || xhr == 304){
+            if (JSON.parse(xhr.responseText).code==0){
+                location.reload();
+            }else{
+                alert(JSON.parse(xhr.responseText).msg)
+            }
+        }else {
+            console.error('error:'+xhr.responseText)
+        }
+    })
+}
+</script>
+</body>
+</html>
