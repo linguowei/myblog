@@ -1,34 +1,32 @@
 import Vue from 'vue'
-import {Tooltip, input} from 'element-ui'
-import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 import App from './App.vue'
-import home from './component/Home.vue'
-import archive from './component/Archive.vue'
-import about from './component/About.vue'
-import articleDetails from './component/ArticleDetails.vue'
-import classify from './component/Classify.vue'
-import label from './component/Label.vue'
+import LatestArticles from './component/latestArticles.vue'
+import Archiver from './component/archives.vue'
+import Tag from './component/tag.vue'
+import About from './component/about.vue'
+import ArticlesDetails from './component/articlesDetails.vue'
 
+Vue.use(ElementUI);
 Vue.use(VueRouter);
 Vue.use(VueResource);
-Vue.use(Tooltip);
-Vue.use(input);
 
 const router = new VueRouter({
-	routes: [
-		{path: '/', component: home},
-		{path: '/home', component: home},
-		{path: '/archive', component: archive},
-		{path: '/about', component: about},
-		{path: '/articleDetails:id', component: articleDetails},
-		{path: '/classify', component: classify},
-		{path: '/label', component: label}
-	]
+    mode: 'history',
+    routes: [
+        {path: '/', component: LatestArticles, mate: { keepAlive: true }},
+        {path: '/archives', component: Archiver},
+        {path: '/tag', component: Tag},
+        {path: '/about', component: About},
+        {path: '/articlesDetails:id', name: 'articlesDetails', component: ArticlesDetails}
+    ]
 })
 
 new Vue({
-  	el: '#app',
-  	router: router,
-  	render: h => h(App)
+    el: '#app',
+    router: router,
+    render: h => h(App)
 })

@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+var CompressionWebpackPlugin = require('compression-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -14,7 +16,9 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options go here
+          loaders: {
+          }
+          // other vue-loader options go here
         }
       },
       {
@@ -31,9 +35,9 @@ module.exports = {
         loader: 'file-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
-        query: {
+        options: {
           name: '[name].[ext]?[hash]'
         }
       }
@@ -41,14 +45,25 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:7000',
+        changeOrigin: true,
+        secure: false
+      }
+    ]
   },
-  devtool: '#eval-source-map'
+  performance: {
+    hints: false
+  },
+  devtool: '#source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -61,13 +76,24 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
+      comments: false,
       compress: {
         warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new CompressionWebpackPlugin({ //gzip 压缩
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: new RegExp(
+            '\\.(js|css)$'    //压缩 js 与 css
+        ),
+        threshold: 10240,
+        minRatio: 0.8
+    }),
+    new ExtractTextPlugin('[name].[contenthash].css')
   ])
 }
