@@ -45,8 +45,16 @@ module.exports = {
     }
   },
   devServer: {
-    historyApiFallback: true,
-    noInfo: true
+      historyApiFallback: true,
+      noInfo: true,
+      proxy: [
+          {
+              context: ['/api'],
+              target: 'http://localhost:7000',
+              changeOrigin: true,
+              secure: false
+          }
+      ]
   },
   devtool: '#eval-source-map'
 }

@@ -11,7 +11,9 @@
                     <h3 :class="{'articlePreview-title-draft': item.state=='draft', 'articlePreview-title-publish': item.state=='publish'}" @click="articlePreview(item._id)">
                         {{item.title}}
                     </h3>
-                    <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</p>
+                    <p>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}
+                        <span class="label-item">{{item.label}}</span>
+                    </p>
                 </li>
             </ul>
         </div>
@@ -55,11 +57,15 @@ export default{
     created: function(){
         // 组件创建完后获取数据，
         // 此时 data 已经被 observed 了
-        if(this.$route.query.labelTitle){
+        var param = localStorage.getItem("lebelTitle")
+        if(param){
+            localStorage.removeItem("lebelTitle")
             this.$http.post('api/admin/articleList', {
-                label: this.$route.query
+                label: param
             }).then(
-                respone => this.articleList = respone.body.reverse(),
+                respone => {
+                    this.articleList = respone.body.reverse();
+                },
                 respone => console.log(respone)
             )
         } else {
@@ -119,8 +125,8 @@ export default{
 }
 .article-list > ul {
     overflow: auto;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 .article-list > ul > li {
     border-bottom: 1px solid #f1f1f1;
@@ -165,5 +171,9 @@ export default{
 .articlePreview-title-draft {
     color: #FF4949;
 }
-
+.label-item {
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
 </style>

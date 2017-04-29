@@ -44,7 +44,8 @@ export default{
     },
     methods: {
         labelClassification: function(title){
-            this.$router.push({path: 'articleList', query: {lebelTitle: title}})
+            localStorage.setItem("lebelTitle",title)
+            this.$router.push('/articleList')
         },
         addArticLabel: function(){
             this.isTagInputShow = true;
@@ -56,12 +57,16 @@ export default{
                 tagNumber: 0
             }
             if(this.tagName){
-                this.articleLabel.push(obj)
                 this.$http.post('/api/saveArticleLabel',{
                     tagList: obj
                 }).then(
                     respone => {
+                        if(respone.body.error){
+                            Message.error(respone.body.msg);
+                            return;
+                        }
             		    Message.success('标签保存成功')
+                        this.articleLabel.push(obj)
                     },
                     respone => Message.error('标签保存失败')
                 )

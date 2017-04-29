@@ -11,7 +11,7 @@
                     </ul>
                 </el-popover>
                 <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
-                <el-tag style="margin: 0 3px 0 3px;" v-for="item in list" :closable="true" type="success" :key="tag" :close-transition="false" @close="handleClose(tag)">
+                <el-tag v-for="(item,index) in list" :closable="true" type="success" :key="index" :close-transition="false" @close="handleClose(tag)">
                     {{item.tagName}}
                 </el-tag>
             </div>
@@ -289,7 +289,7 @@ export default {
     line-height: 60px;
 }
 .label {
-    width: 50%;
+    width: 60%;
     height: 60px;
     line-height: 60px;
     padding-left: 10px;

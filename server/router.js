@@ -61,9 +61,9 @@ router.get('/api/admin/articleList', function(req, res){
         res.json(docs)
     })
 });
-// 查询文章列表路由(含查询条件) 用于博客后端管理系统包含草稿和已发布文章数据
+// 查询文章列表路由(根据标签返回对应的文章列表) 用于博客后端管理系统包含草稿和已发布文章数据
 router.post('/api/admin/articleList', function(req, res){
-    db.Article.find({label: req.body.label.label}, function(err, docs){
+    db.Article.find({label: req.body.label}, function(err, docs){
         if (err) {
             console.log('出错'+ err);
             return
@@ -112,7 +112,6 @@ router.post('/api/saveArticle', function(req, res){
     })
 });
 
-
 // 文章更新路由
 router.post('/api/updateArticle', function(req, res){
     db.Article.find({_id: req.body.obj._id}, function(err, docs){
@@ -133,23 +132,80 @@ router.post('/api/updateArticle', function(req, res){
         })
     })
 });
-// 文章标签查询路由
-router.get('/api/getArticleLabel', function(req, res){
-    db.TagList.find({},function(err, docs){
+
+// 删除文章
+router.post('/api/delect/article', function(req, res){
+    db.Article.remove({_id: req.body._id}, function(err, docs){
         if (err) {
+            res.status(500).send();
             return
         }
+        res.send()
+    })
+})
+
+// 文章标签查询路由
+router.get('/api/getArticleLabel', function(req, res){
+    // db.Article.find({},function(err, docs){
+    //     if (err) {
+    //         return
+    //     }
+    //     var tagList = [];
+    //     var tagObj = {};
+    //     for (let i=0; i<docs.length; i++){
+    //         let item = docs[i];
+    //         if (tagObj[item.label] === undefined){
+    //             tagObj[item.label] = tagList.length
+    //             tagList.push({
+    //                 tagName: item.label,
+    //                 tagNumber: 1
+    //             })
+    //         }else{
+    //             tagList[tagObj[item.label]].tagNumber++
+    //         }
+    //     }
+    //     db.TagList.find({}, function(err, docs){
+    //         if(err)return;
+    //         var resultTagList = [];
+    //         for (var j=0; j<docs.length; j++){
+    //             for (var i=0; i<tagList.length; i++){
+    //                 if (tagList[i].tagName == docs[j].tagName){
+    //                     resultTagList.push(tagList[i])
+    //                 }else if (docs[j].tagNumber==0){
+    //                     resultTagList.push(docs[j])
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //         res.json(resultTagList)
+    //     })
+    // })
+    db.TagList.find({}, function(err, docs){
+        if (err)return;
         res.json(docs)
     })
 });
 // 文章标签保存路由
 router.post('/api/saveArticleLabel', function(req, res){
-    new db.TagList(req.body.tagList).save(function(error){
-        if (error) {
-            res.send('保存失败');
-            return
+    db.TagList.find({}, function(err, docs){
+        if(err)return;
+        var isExist = false;
+        docs.forEach(function(item){
+            if(item.tagName == req.body.tagList.tagName){
+                isExist = true;
+            }
+        })
+        if (isExist){
+            res.json({error: true, msg: '标签已存在'})
+        }else{
+            new db.TagList(req.body.tagList).save(function(error){
+                if (error) {
+                    res.send('保存失败');
+                    return
+                }
+                res.send()
+            })
         }
-        res.send()
     })
 });
 // 博客信息路由
@@ -189,17 +245,6 @@ router.get('/api/personalInformation', function(req, res){
             return
         }
         res.json(docs)
-    })
-})
-
-// 删除文章
-router.post('/api/delect/article', function(req, res){
-    db.Article.remove({_id: req.body._id}, function(err, docs){
-        if (err) {
-            res.status(500).send();
-            return
-        }
-        res.send()
     })
 })
 
