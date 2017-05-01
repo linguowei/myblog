@@ -4,7 +4,7 @@
         <ul class="about-wrap">
             <li>前端码农</li>
             <li>博客：
-                <a style="color: #32D3C3;" href="http://lweiwei.com">http://lweiwei.com</a>
+                <a style="color: #32D3C3;" href="http://lweiwei.com">https://lweiwei.com</a>
             </li>
             <li>github：
                 <a style="color: #32D3C3;" href="https://github.com/linguowei">https://github.com/linguowei</a>

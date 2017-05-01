@@ -65,9 +65,23 @@ export default {
                         return highlight.highlightAuto(code).value;
                     }
                 })
-                el.innerHTML = marked(el.innerText)
-                var preList = el.querySelectorAll('pre')
-                var imgList = el.querySelectorAll('img')
+                el.innerHTML = marked(el.innerText);
+                var preList = el.querySelectorAll('pre');
+                var imgList = el.querySelectorAll('img');
+                var strongList = el.querySelectorAll('strong');
+                var pList = el.querySelectorAll('p');
+                var aList = el.querySelectorAll('a');
+                for (let i=0; i<aList.length; i++){
+                    aList[i].style.color = '#32D3C3'
+                    aList[i].style.textDecoration = 'none'
+                    aList[i].setAttribute('target', '_blank')
+                }
+                for (let i=0; i<pList.length; i++){
+                    pList[i].style.color = '#3E495E'
+                }
+                for (let i=0; i<strongList.length; i++){
+                    strongList[i].style.color = '#32D3C3'
+                }
                 for(let i=0; i<imgList.length; i++){
                     imgList[i].style.width = 100 + '%';
                 }
@@ -90,12 +104,19 @@ export default {
 </script>
 
 <style scoped>
+@meida screen and (max-width: 768px){
+    #articlesDetails > div{
+        width: 90%;
+    }
+}
 #articlesDetails {
     height: 100vh;
     overflow: scroll;
     text-align: center;
     padding: 0 1rem;
     background-color: #fff;
+    font-family: Avenir,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 .detail-header {
     height: 4rem;
@@ -121,6 +142,6 @@ export default {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px dashed #999999;
-    color: #666;
+    /*color: #666;*/
 }
 </style>
