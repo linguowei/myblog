@@ -84,7 +84,7 @@ export default {
         })
         this.$http.get('/api/articleList').then(
             res => {
-                this.articleList = res.body
+                this.articleList = res.body.reverse();
                 // let a = res.body[2].articleContent.replace(/[^\u4e00-\u9fa5]/gi,'')
             },
             res => {
