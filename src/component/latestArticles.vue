@@ -1,14 +1,6 @@
 <template>
     <div>
         <el-row :gutter="0">
-            <!--<el-col :xs="22" :sm="22" :md="20" :lg="20" :push="1">
-                <div class="main-header">
-                    <span>最新文章</span>
-                    <el-input class="search"
-                        icon="search">
-                    </el-input>
-                </div>
-            </el-col>-->
             <el-col :xs="22" :sm="22" :md="20" :lg="20" :push="1">
                 <div class="grid-content bg-purple">
                     <el-tabs>
@@ -118,4 +110,11 @@ export default {
 
 <style scoped>
 @import '../style/latestArticles.css';
+.post-title{
+    height: 29px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>

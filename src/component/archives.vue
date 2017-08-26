@@ -77,8 +77,7 @@ export default {
         })
         this.$http.get('/api/articleList').then(
             res => {
-                this.articleList = res.body
-                // let a = res.body[2].articleContent.replace(/[^\u4e00-\u9fa5]/gi,'')
+                this.articleList = res.body.reverse();
             },
             res => {
                 console.log(res)
@@ -88,7 +87,6 @@ export default {
     methods: {
         articlesDetailsFn: function(id){
             this.$router.push({ name: 'articlesDetails', params: { id: id }})
-            // this.$router.push('articlesDetails'+id+'')
         }
     },
     directives: {
@@ -110,5 +108,11 @@ export default {
 </script>
 
 <style scoped>
-
+.post-title{
+    height: 29px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>

@@ -1,7 +1,9 @@
 <template>
     <div id="tag">
         <h3>标签</h3>
-        <div v-for="item in tagList">{{item.tagName}}</div>
+        <div class="tag-wrap">
+            <span v-for="item in tagList">{{item.tagName}}</span>
+        </div>
     </div>
 </template>
 
@@ -38,8 +40,11 @@ export default {
     padding: 1rem 2rem;
     border-bottom: 1px dashed #DDD;
 }
-#tag div {
-    float: left;
+#tag .tag-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+#tag span {
     padding: 0.5rem 2rem;
     border: 1px #32D3C3 solid;
     border-radius: 5px;

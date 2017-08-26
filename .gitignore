@@ -5,3 +5,7 @@ npm-debug.log
 *.xml
 
 *.iml
+
+.vscode/launch.json
+
+.vscode/settings.json
