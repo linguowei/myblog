@@ -41,9 +41,9 @@
             <el-col :xs="24" :sm="20" :md="20" :lg="20">
                 <div class="main">
                     <transition name="fade" mode="out-in">
-                        <keep-alive>
-                            <router-view></router-view>
-                        </keep-alive>
+                        <!-- <keep-alive> -->
+                        <router-view></router-view>
+                        <!-- </keep-alive> -->
                         <!--<router-view v-if="$route.meta.keepAlive == false"></router-view>-->
                     </transition>
                 </div>
